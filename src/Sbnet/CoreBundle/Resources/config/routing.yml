@@ -1,0 +1,3 @@
+sbnet_core_homepage:
+    path:     /
+    defaults: { _controller: SbnetCoreBundle:Default:index }
