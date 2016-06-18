@@ -1,6 +1,6 @@
 <?php
 
-namespace Sbnet\CoreBundle\Tests\Controller;
+namespace Sbnet\FrontBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -12,6 +12,6 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('©SBNET', $client->getResponse()->getContent());
+        $this->assertContains('Hello World', $client->getResponse()->getContent());
     }
 }

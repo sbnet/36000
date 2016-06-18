@@ -1,0 +1,4 @@
+services:
+#    sbnet_front.example:
+#        class: Sbnet\FrontBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

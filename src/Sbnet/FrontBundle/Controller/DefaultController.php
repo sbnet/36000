@@ -1,6 +1,6 @@
 <?php
 
-namespace Sbnet\CoreBundle\Controller;
+namespace Sbnet\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SbnetCoreBundle:Default:index.html.twig');
+        return $this->render('SbnetFrontBundle:Default:index.html.twig');
     }
 }

@@ -1,4 +1,3 @@
-sbnet_core:
-    resource: "@SbnetCoreBundle/Resources/config/routing.yml"
+sbnet_front:
+    resource: "@SbnetFrontBundle/Resources/config/routing.yml"
     prefix:   /
-
