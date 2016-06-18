@@ -1,7 +1,3 @@
-sbnet_trente_six:
-    resource: "@SbnetTrenteSixBundle/Resources/config/routing.yml"
-    prefix:   /
-
 sbnet_core:
     resource: "@SbnetCoreBundle/Resources/config/routing.yml"
     prefix:   /
