@@ -49,7 +49,7 @@ class LoadArea implements FixtureInterface, ContainerAwareInterface, OrderedFixt
 
     // Read the json file, line by line
     while (FALSE !== ($data = fgetcsv($handle, 0, "\t"))) {
-    // Get the corresponding region
+      // Get the corresponding region
       $region = $manager
                 ->getRepository('SbnetCoreBundle:Region')
                 ->findOneByCode($data[0]);
