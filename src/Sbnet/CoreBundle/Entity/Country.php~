@@ -31,29 +31,80 @@ class Country
     private $formalName;
 
     /**
-     * @ORM\Column(name="currency_code", type="string", length=255)
+     * @ORM\Column(name="old_name", type="string", length=255, nullable=true)
+     */
+    private $oldName;
+
+    /**
+     * @ORM\Column(name="currency_code", type="string", length=255, nullable=true)
      */
     private $currencyCode;
 
     /**
-     * @ORM\Column(name="currency_name", type="string", length=255)
+     * @ORM\Column(name="currency_name", type="string", length=255, nullable=true)
      */
     private $currency;
 
     /**
-     * @ORM\Column(name="phone_code", type="string", length=255)
+     * @ORM\Column(name="phone_code", type="string", length=255, nullable=true)
      */
     private $phoneCode;
 
     /**
-     * @ORM\Column(name="code2", type="string", length=2)
+     * Satus
+     * @see : http://www.insee.fr/fr/methodes/nomenclatures/cog/documentation.asp?page=telechargement/2016/doc/doc_variables.htm#actualp
+     *
+     * @ORM\Column(name="status", type="integer")
      */
-    private $code2;
+    private $status;
 
     /**
-     * @ORM\Column(name="code3", type="string", length=3)
+     * French COG
+     *
+     * @ORM\Column(name="code", type="integer")
      */
-    private $code3;
+    private $code;
+
+    /**
+     * Actual code of the referent country
+     *
+     * Note :
+     *  If this field is empty, it mean that this country is expired ($status = 2) and was linked to many other countires in the past. 
+     *  To find them, we just need to find the $actualReferenceCode of the country wich is prent in the $code of countries with $status = 1
+     *
+     *  Example :
+     *  COREE : $code is 99237, $status is 2 and actualReferenceCode is empty. To find the refferal countries, 
+     *          we need to search for 99237 inside the $code :
+     *    - COREE (REPUBLIQUE POPULAIRE DEMOCRATIQUE DE )
+     *      $code = 99238 $status = 1
+     *    - COREE (REPUBLIQUE DE )
+     *      $code = 99239 $status = 1
+     *
+     * @ORM\Column(name="actual_reference_code", type="integer", nullable=true)
+     */
+    private $actualReferenceCode;
+
+    /**
+     * Geographical code of an old referent country.
+     *
+     * @ORM\Column(name="old_reference_code", type="integer", nullable=true)
+     */
+    private $oldReferenceCode;
+
+    /**
+     * @ORM\Column(name="iso_code2", type="string", length=2)
+     */
+    private $isoCode2;
+
+    /**
+     * @ORM\Column(name="iso_code3", type="string", length=3)
+     */
+    private $isoCode3;
+
+    /**
+     * @ORM\Column(name="independance_year", type="integer", nullable=true)
+     */
+    private $independanceYear;
 
     /**
      * Get id
@@ -231,5 +282,221 @@ class Country
     public function getCode3()
     {
         return $this->code3;
+    }
+
+    /**
+     * Set oldName
+     *
+     * @param string $oldName
+     *
+     * @return Country
+     */
+    public function setOldName($oldName)
+    {
+        $this->oldName = $oldName;
+
+        return $this;
+    }
+
+    /**
+     * Get oldName
+     *
+     * @return string
+     */
+    public function getOldName()
+    {
+        return $this->oldName;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Country
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set code
+     *
+     * @param integer $code
+     *
+     * @return Country
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return integer
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set actualReferenceCode
+     *
+     * @param integer $actualReferenceCode
+     *
+     * @return Country
+     */
+    public function setActualReferenceCode($actualReferenceCode)
+    {
+        $this->actualReferenceCode = $actualReferenceCode;
+
+        return $this;
+    }
+
+    /**
+     * Get actualReferenceCode
+     *
+     * @return integer
+     */
+    public function getActualReferenceCode()
+    {
+        return $this->actualReferenceCode;
+    }
+
+    /**
+     * Set oldReferenceCode
+     *
+     * @param integer $oldReferenceCode
+     *
+     * @return Country
+     */
+    public function setOldReferenceCode($oldReferenceCode)
+    {
+        $this->oldReferenceCode = $oldReferenceCode;
+
+        return $this;
+    }
+
+    /**
+     * Get oldReferenceCode
+     *
+     * @return integer
+     */
+    public function getOldReferenceCode()
+    {
+        return $this->oldReferenceCode;
+    }
+
+    /**
+     * Set isoCode2
+     *
+     * @param string $isoCode2
+     *
+     * @return Country
+     */
+    public function setIsoCode2($isoCode2)
+    {
+        $this->isoCode2 = $isoCode2;
+
+        return $this;
+    }
+
+    /**
+     * Get isoCode2
+     *
+     * @return string
+     */
+    public function getIsoCode2()
+    {
+        return $this->isoCode2;
+    }
+
+    /**
+     * Set isoCode3
+     *
+     * @param string $isoCode3
+     *
+     * @return Country
+     */
+    public function setIsoCode3($isoCode3)
+    {
+        $this->isoCode3 = $isoCode3;
+
+        return $this;
+    }
+
+    /**
+     * Get isoCode3
+     *
+     * @return string
+     */
+    public function getIsoCode3()
+    {
+        return $this->isoCode3;
+    }
+
+    /**
+     * Set codeNum3
+     *
+     * @param string $codeNum3
+     *
+     * @return Country
+     */
+    public function setCodeNum3($codeNum3)
+    {
+        $this->codeNum3 = $codeNum3;
+
+        return $this;
+    }
+
+    /**
+     * Get codeNum3
+     *
+     * @return string
+     */
+    public function getCodeNum3()
+    {
+        return $this->codeNum3;
+    }
+
+    /**
+     * Set independanceYear
+     *
+     * @param integer $independanceYear
+     *
+     * @return Country
+     */
+    public function setIndependanceYear($independanceYear)
+    {
+        $this->independanceYear = $independanceYear;
+
+        return $this;
+    }
+
+    /**
+     * Get independanceYear
+     *
+     * @return integer
+     */
+    public function getIndependanceYear()
+    {
+        return $this->independanceYear;
     }
 }
