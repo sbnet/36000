@@ -25,6 +25,46 @@ class City
      */
     private $name;
 
+    /**
+     * @ORM\Column(name="prefix", type="string", length=255, nullable=true)
+     */
+    private $prefix;
+
+    /**
+     * @ORM\Column(name="search", type="string", length=255, nullable=true)
+     */
+    private $search;
+
+    /**
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(name="department_code", type="string", length=255)
+     */
+    private $departmentCode;
+
+    /**
+     * @ORM\Column(name="city_code", type="string", length=255)
+     */
+    private $cityCode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Sbnet\CoreBundle\Entity\Area")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $area;
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getInseeCode()
+    {
+        return "{$this->departmentCode}{$this->cityCode}";
+    }
 
     /**
      * Get id
@@ -58,5 +98,149 @@ class City
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set prefix
+     *
+     * @param string $prefix
+     *
+     * @return City
+     */
+    public function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * Get prefix
+     *
+     * @return string
+     */
+    public function getPrefix()
+    {
+        return $this->prefix;
+    }
+
+    /**
+     * Set search
+     *
+     * @param string $search
+     *
+     * @return City
+     */
+    public function setSearch($search)
+    {
+        $this->search = $search;
+
+        return $this;
+    }
+
+    /**
+     * Get search
+     *
+     * @return string
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return City
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set departmentCode
+     *
+     * @param string $departmentCode
+     *
+     * @return City
+     */
+    public function setDepartmentCode($departmentCode)
+    {
+        $this->departmentCode = $departmentCode;
+
+        return $this;
+    }
+
+    /**
+     * Get departmentCode
+     *
+     * @return string
+     */
+    public function getDepartmentCode()
+    {
+        return $this->departmentCode;
+    }
+
+    /**
+     * Set cityCode
+     *
+     * @param string $cityCode
+     *
+     * @return City
+     */
+    public function setCityCode($cityCode)
+    {
+        $this->cityCode = $cityCode;
+
+        return $this;
+    }
+
+    /**
+     * Get cityCode
+     *
+     * @return string
+     */
+    public function getCityCode()
+    {
+        return $this->cityCode;
+    }
+
+    /**
+     * Set area
+     *
+     * @param \Sbnet\CoreBundle\Entity\Area $area
+     *
+     * @return City
+     */
+    public function setArea(\Sbnet\CoreBundle\Entity\Area $area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return \Sbnet\CoreBundle\Entity\Area
+     */
+    public function getArea()
+    {
+        return $this->area;
     }
 }

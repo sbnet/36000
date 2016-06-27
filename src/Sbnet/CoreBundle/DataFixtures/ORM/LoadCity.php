@@ -6,9 +6,9 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Sbnet\CoreBundle\Entity\Country;
+use Sbnet\CoreBundle\Entity\City;
 
-class LoadCountry implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
   /**
    * @var ContainerInterface
@@ -24,7 +24,7 @@ class LoadCountry implements FixtureInterface, ContainerAwareInterface, OrderedF
   {
     // the order in which fixtures will be loaded
     // the lower the number, the sooner that this fixture is loaded
-    return 10;
+    return 40;
   }
 
   public function load(ObjectManager $manager)
@@ -32,7 +32,7 @@ class LoadCountry implements FixtureInterface, ContainerAwareInterface, OrderedF
     $batchSize = 20;
     $i = 1;
 
-    $file = $this->container->getParameter('kernel.root_dir').'/../data/pays-2016.csv';
+    $file = $this->container->getParameter('kernel.root_dir').'/../data/communes-2016.csv';
 
     if (!file_exists($file)) {
       throw new \Exception("Data file ($file) is not present !");
@@ -49,27 +49,40 @@ class LoadCountry implements FixtureInterface, ContainerAwareInterface, OrderedF
     // get stored in memory for each iteration.
     // http://stackoverflow.com/questions/9699185/memory-leaks-symfony2-doctrine2-exceed-memory-limit
     $manager->getConnection()->getConfiguration()->setSQLLogger(null);
-    
+
     // Skip the first line
     $data = fgetcsv($handle, 0, "\t");
 
-    // Read the file, line by line
+    // Read the json file, line by line
     while (FALSE !== ($data = fgetcsv($handle, 0, "\t"))) {
-      $obj = new Country;
-      $obj->setCode($data[0]);
-      $obj->setStatus($data[1]);
-      $obj->setName($data[5]);
-      $obj->setFormalName($data[6]);
-      $obj->setOldName($data[7]);
-      $obj->setIsoCode2($data[8]);
-      $obj->setIsoCode3($data[9]);
-      $manager->persist($obj);
+      if (!empty($data[4])) {
 
-      // Load the database in batch
-      if (($i % $batchSize) == 0) {
-        $manager->flush();
-        $manager->clear();
-      }   
+        // Get the corresponding area
+        $area = $manager
+                  ->getRepository('SbnetCoreBundle:Area')
+                  ->findOneByCode($data[4]);
+
+        $obj = new City;
+        $obj->setStatus($data[0]);
+        $obj->setCityCode($data[6]);
+        $obj->setDepartmentCode($data[5]);
+        $obj->setName($data[15]);
+
+        if (!empty($data[14])) {
+          $obj->setPrefix(str_replace(array("(", ")"), "", $data[14]));        
+        }
+
+        $obj->setArea($area);
+        $manager->persist($obj);
+
+        // Load the database in batch
+        if (($i % $batchSize) === 0) {
+          $manager->flush();
+          $manager->clear();
+        }    
+
+        $i++;  
+      }
     }
 
     $manager->flush();
