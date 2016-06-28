@@ -1,14 +1,20 @@
 language: php
 php:
-  - '5.4'
-  - '5.5'
-  - '5.6'
-  - '7.0'
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
   - hhvm
-  - nightly
 
 install:
   - composer install 
 
-env:
-  - SYMFONY_VERSION="dev-master" DB=mysql  
+mysql:
+  database: 36000
+  username: root
+  encoding: utf8
+
+before_script:
+  - php bin/console doctrine:database:create
+  - php bin/console doctrine:schema:update --force
+  - php bin/console doctrine:fixtures:load
