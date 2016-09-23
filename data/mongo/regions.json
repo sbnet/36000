@@ -1,0 +1,44 @@
+{ "_id" : { "$oid" : "01" }, "cheflieu" : "97105", "prefix" : "3", "search" : "GUADELOUPE", "nom" :  "Guadeloupe" }
+{ "_id" : { "$oid" : "02" }, "cheflieu" : "97209", "prefix" : "3", "search" : "MARTINIQUE", "nom" :  "Martinique" }
+{ "_id" : { "$oid" : "03" }, "cheflieu" : "97302", "prefix" : "3", "search" : "GUYANE", "nom" :  "Guyane" }
+{ "_id" : { "$oid" : "04" }, "cheflieu" : "97411", "prefix" : "0", "search" : "REUNION", "nom" : "La Réunion" }  
+{ "_id" : { "$oid" : "06" }, "cheflieu" : "97608", "prefix" : "0", "search" : "MAYOTTE", "nom" : "Mayotte" }
+{ "_id" : { "$oid" : "11" }, "cheflieu" : "75056", "prefix" : "1", "search" : "ILEDEFRANCE", "nom" : "Île-de-France" } 
+{ "_id" : { "$oid" : "24" }, "cheflieu" : "45234", "prefix" : "2", "search" : "CENTREVALDELOIRE", "nom" : "Centre-Val de Loire" } 
+{ "_id" : { "$oid" : "27" }, "cheflieu" : "21231", "prefix" : "0", "search" : "BOURGOGNEFRANCHECOMTE", "nom" : "Bourgogne-Franche-Comté" }
+{ "_id" : { "$oid" : "28" }, "cheflieu" : "76540", "prefix" : "0", "search" : "NORMANDIE", "nom" :   "Normandie" }
+{ "_id" : { "$oid" : "32" }, "cheflieu" : "59350", "prefix" : "2", "search" : "NORDPASDECALAISPICARDIE", "nom" : "Nord-Pas-de-Calais-Picardie" }
+{ "_id" : { "$oid" : "44" }, "cheflieu" : "67482", "prefix" : "1", "search" : "ALSACECHAMPAGNEARDENNELORRAINE", "nom" : "Alsace-Champagne-Ardenne-Lorraine" } 
+{ "_id" : { "$oid" : "52" }, "cheflieu" : "44109", "prefix" : "4", "search" : "PAYSDELALOIRE", "nom" : "Pays de la Loire" }
+{ "_id" : { "$oid" : "53" }, "cheflieu" : "35238", "prefix" : "0", "search" : "BRETAGNE", "nom" :    "Bretagne" }
+{ "_id" : { "$oid" : "75" }, "cheflieu" : "33063", "prefix" : "1", "search" : "AQUITAINELIMOUSINPOITOUCHARENTES", "nom" : "Aquitaine-Limousin-Poitou-Charentes" }
+{ "_id" : { "$oid" : "76" }, "cheflieu" : "31555", "prefix" : "2", "search" : "LANGUEDOCROUSSILLONMIDIPYRENEES", "nom" : "Languedoc-Roussillon-Midi-Pyrénées" }  
+{ "_id" : { "$oid" : "84" }, "cheflieu" : "69123", "prefix" : "1", "search" : "AUVERGNERHONEALPES", "nom" : "Auvergne-Rhône-Alpes" }
+{ "_id" : { "$oid" : "93" }, "cheflieu" : "13055", "prefix" : "0", "search" : "PROVENCEALPESCOTEDAZUR", "nom" : "Provence-Alpes-Côte d'Azur" }
+{ "_id" : { "$oid" : "94" }, "cheflieu" : "2A004", "prefix" : "0", "search" : "CORSE", "nom" :   "Corse" }
+
+/*
+{ "_id" : { "$oid" : "4d974528dae36dc016000000" }, "nom" : "Alsace", "search" : "ALSACE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000001" }, "nom" : "Aquitaine", "search" : "AQUITAINE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000002" }, "nom" : "Auvergne", "search" : "AUVERGNE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000003" }, "nom" : "Bourgogne", "search" : "BOURGOGNE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000004" }, "nom" : "Bretagne", "search" : "BRETAGNE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000005" }, "nom" : "Centre", "search" : "CENTRE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000006" }, "nom" : "Champagne-Ardenne", "search" : "CHAMPAGNEARDENNE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000007" }, "nom" : "Corse", "search" : "CORSE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000008" }, "nom" : "Franche-Comté", "search" : "FRANCHECOMTE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000009" }, "nom" : "Ile-de-France", "search" : "ILEDEFRANCE" }
+{ "_id" : { "$oid" : "4d974528dae36dc01600000a" }, "nom" : "Languedoc-Roussillon", "search" : "LANGUEDOCROUSSILLON" }
+{ "_id" : { "$oid" : "4d974528dae36dc01600000b" }, "nom" : "Limousin", "search" : "LIMOUSIN" }
+{ "_id" : { "$oid" : "4d974528dae36dc01600000c" }, "nom" : "Lorraine", "search" : "LORRAINE" }
+{ "_id" : { "$oid" : "4d974528dae36dc01600000d" }, "nom" : "Midi-Pyrénées", "search" : "MIDIPYRENEES" }
+{ "_id" : { "$oid" : "4d974528dae36dc01600000e" }, "nom" : "Nord-Pas-de-Calais", "search" : "NORDPASDECALAIS" }
+{ "_id" : { "$oid" : "4d974528dae36dc01600000f" }, "nom" : "Basse-Normandie", "search" : "BASSENORMANDIE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000010" }, "nom" : "Haute-Normandie", "search" : "HAUTENORMANDIE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000011" }, "nom" : "Pays de la Loire", "search" : "PAYSDELALOIRE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000012" }, "nom" : "Picardie", "search" : "PICARDIE" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000013" }, "nom" : "Poitou-Charentes", "search" : "POITOUCHARENTES" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000014" }, "nom" : "Provence-Alpes-Côte d'Azur", "search" : "PROVENCEALPESCOTEDAZUR" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000015" }, "nom" : "Rhône-Alpes", "search" : "RHONEALPES" }
+{ "_id" : { "$oid" : "4d974528dae36dc016000016" }, "nom" : "DOM", "search" : "DOM" }
+*/
