@@ -29,6 +29,12 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
 
   public function load(ObjectManager $manager)
   {
+    $this->loadCities($manager);
+    $this->updateSpacial($manager);
+  }
+
+  private function loadCities(ObjectManager $manager)
+  {
     $batchSize = 20;
     $i = 1;
 
@@ -44,8 +50,8 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
       throw new \Exception("Can't read the file !");
     }
 
-    // By default logging of the SQL connection is set to the value of kernel.debug, 
-    // so if you have instantiated AppKernel with debug set to true the SQL commands 
+    // By default logging of the SQL connection is set to the value of kernel.debug,
+    // so if you have instantiated AppKernel with debug set to true the SQL commands
     // get stored in memory for each iteration.
     // http://stackoverflow.com/questions/9699185/memory-leaks-symfony2-doctrine2-exceed-memory-limit
     $manager->getConnection()->getConfiguration()->setSQLLogger(null);
@@ -53,7 +59,7 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
     // Skip the first line
     $data = fgetcsv($handle, 0, "\t");
 
-    // Read the json file, line by line
+    // Read the file, line by line
     while (FALSE !== ($data = fgetcsv($handle, 0, "\t"))) {
       if (!empty($data[4])) {
 
@@ -69,7 +75,7 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
         $obj->setName($data[15]);
 
         if (!empty($data[14])) {
-          $obj->setPrefix(str_replace(array("(", ")"), "", $data[14]));        
+          $obj->setPrefix(str_replace(array("(", ")"), "", $data[14]));
         }
 
         $obj->setArea($area);
@@ -79,10 +85,70 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
         if (($i % $batchSize) === 0) {
           $manager->flush();
           $manager->clear();
-        }    
+        }
 
-        $i++;  
+        $i++;
       }
+    }
+
+    $manager->flush();
+    $manager->clear();
+    fclose($handle);
+  }
+
+  private function updateSpacial(ObjectManager $manager)
+  {
+    $batchSize = 20;
+    $i = 1;
+
+    $file = $this->container->getParameter('kernel.root_dir').'/../data/mongo/villes.json';
+
+    if (!file_exists($file)) {
+      throw new \Exception("Data file ($file) is not present !");
+    }
+
+    $handle = fopen($file, "r");
+
+    if (!$handle) {
+      throw new \Exception("Can't read the file !");
+    }
+
+    // By default logging of the SQL connection is set to the value of kernel.debug,
+    // so if you have instantiated AppKernel with debug set to true the SQL commands
+    // get stored in memory for each iteration.
+    // http://stackoverflow.com/questions/9699185/memory-leaks-symfony2-doctrine2-exceed-memory-limit
+    $manager->getConnection()->getConfiguration()->setSQLLogger(null);
+
+    // Read the json file, line by line
+    while (FALSE !== ($data = fgets($handle))) {
+      $obj = json_decode($data);
+
+      // Get the corresponding city
+      $city = $manager
+              ->getRepository('SbnetCoreBundle:City')
+              ->findOneByInseeCode($obj->insee);
+
+      if ($city) {
+        $city->setCoordinates(new \Sbnet\CoreBundle\ORM\Point($obj->geo->lat, $obj->geo->lon));
+        $manager->persist($city);
+      } else {
+        throw new \Exception("Can't find {$obj->insee} !");
+      }
+
+      // Load the database in batch
+      if (($i % $batchSize) === 0) {
+
+        try{
+          $manager->flush();
+          $manager->clear();
+        } catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            var_dump($city);
+        }
+
+      }
+
+      $i++;
     }
 
     $manager->flush();

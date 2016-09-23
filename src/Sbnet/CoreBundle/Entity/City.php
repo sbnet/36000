@@ -51,20 +51,25 @@ class City
     private $cityCode;
 
     /**
+     * @ORM\Column(name="coordinates", type="point", nullable=true)
+     */
+    private $coordinates;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Sbnet\CoreBundle\Entity\Area")
      * @ORM\JoinColumn(nullable=false)
      */
     private $area;
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getInseeCode()
-    {
-        return "{$this->departmentCode}{$this->cityCode}";
-    }
+    // /**
+    //  * Get name
+    //  *
+    //  * @return string
+    //  */
+    // public function getInseeCode()
+    // {
+    //     return "{$this->departmentCode}{$this->cityCode}";
+    // }
 
     /**
      * Get id
@@ -242,5 +247,39 @@ class City
     public function getArea()
     {
         return $this->area;
+    }
+
+    /**
+     * Set coordinates
+     *
+     * @param point $coordinates
+     *
+     * @return City
+     */
+    public function setCoordinates(\Sbnet\CoreBundle\ORM\Point $coordinates)
+    {
+        $this->coordinates = $coordinates;
+
+        return $this;
+    }
+
+    /**
+     * Get coordinates
+     *
+     * @return point
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * Get insee
+     *
+     * @return integer
+     */
+    public function getInsee()
+    {
+        return (int)((string)$this->getDepartmentCode()+(string)$this->getCityCode());
     }
 }

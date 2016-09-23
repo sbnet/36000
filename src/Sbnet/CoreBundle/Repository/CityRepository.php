@@ -10,4 +10,18 @@ namespace Sbnet\CoreBundle\Repository;
  */
 class CityRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOneByInseeCode($insee_code)
+    {
+      $city_code = substr($insee_code, -3);
+      $department_code = str_replace($city_code, "", $insee_code);
+
+      $city = $this->findOneBy(
+        array(
+          "departmentCode" => $department_code,
+          "cityCode" => $city_code
+        )
+      );
+
+      return $city;
+    }
 }
