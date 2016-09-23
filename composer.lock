@@ -4,9 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "142b4a51575fdd4dae2d1793b34e567f",
-    "content-hash": "0b7429a448685703f79c88930bad84ed",
+    "hash": "e179b28182d39ddc7a1efcb5f076a7cf",
+    "content-hash": "eff8b061f2dfd9d18c276bd5ce71466f",
     "packages": [
+        {
+            "name": "Wantlet",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jhartikainen/doctrine2-spatial.git",
+                "reference": "1c1d55dee7939729620f061c7f8aca3747a0c6c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jhartikainen/doctrine2-spatial/zipball/1c1d55dee7939729620f061c7f8aca3747a0c6c7",
+                "reference": "1c1d55dee7939729620f061c7f8aca3747a0c6c7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "~2.2,>=2.2.3",
+                "php": ">=5.3.3"
+            },
+            "type": "doctrine-orm",
+            "autoload": {
+                "psr-0": {
+                    "Wantlet\\ORM": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Some spatial data related classes developed for Doctrine 2",
+            "keywords": [
+                "doctrine",
+                "mysql",
+                "spatial"
+            ],
+            "support": {
+                "source": "https://github.com/jhartikainen/doctrine2-spatial/tree/master",
+                "issues": "https://github.com/jhartikainen/doctrine2-spatial/issues"
+            },
+            "time": "2014-08-17 09:01:34"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -2018,16 +2057,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.2",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "33093f6e310e6976baeac7b14f3a6ec02f2d79b7"
+                "reference": "f16a634ab08d87e520da5671ec52153d627f10f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/33093f6e310e6976baeac7b14f3a6ec02f2d79b7",
-                "reference": "33093f6e310e6976baeac7b14f3a6ec02f2d79b7",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f16a634ab08d87e520da5671ec52153d627f10f6",
+                "reference": "f16a634ab08d87e520da5671ec52153d627f10f6",
                 "shasum": ""
             },
             "require": {
@@ -2040,7 +2079,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.24-dev"
+                    "dev-master": "1.25-dev"
                 }
             },
             "autoload": {
@@ -2075,7 +2114,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-09-01 17:50:53"
+            "time": "2016-09-21 23:05:12"
         }
     ],
     "packages-dev": [
@@ -2189,7 +2228,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "wantlet": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

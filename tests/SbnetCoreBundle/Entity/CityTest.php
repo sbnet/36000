@@ -25,10 +25,14 @@ class CityTest extends KernelTestCase
 
     public function testSpatial()
     {
-        $ent = new \Sbnet\CoreBundle\Entity\City();
-        $point = new \Sbnet\CoreBundle\ORM\Point(10, 20.5);
+        $point = new \Sbnet\CoreBundle\ORM\Point(1, 1);
 
+        $ent = new \Sbnet\CoreBundle\Entity\City();
         $ent->setCoordinates($point);
+        $ent->setName("bigville");
+        $ent->setStatus(0);
+        $ent->setDepartmentCode(84);
+        $ent->setCityCode(1);
 
         $this->em->persist($ent);
         $this->em->flush();

@@ -55,11 +55,19 @@ doctrine:
         #     path:     "%database_path%"
         types:
             point:
-                class:  Sbnet\CoreBundle\ORM\PointType
+                class:  Wantlet\ORM\PointType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        default_entity_manager:   default
+        entity_managers:
+          default:
+              auto_mapping: true
+              dql:
+                numeric_functions:
+                  DISTANCE: Wantlet\ORM\Distance
+                  POINT_STR: Wantlet\ORM\PointStr
 
 # Swiftmailer Configuration
 swiftmailer:
