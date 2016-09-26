@@ -29,16 +29,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "~2.3",
-        "Wantlet": "dev-master"
+        "creof/doctrine2-spatial": "~1"
     },
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/jhartikainen/doctrine2-spatial",
-            "comment": "Doctrine Spatial Data Types"
-        }
-    ],
 
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

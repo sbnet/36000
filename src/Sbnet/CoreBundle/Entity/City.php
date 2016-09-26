@@ -2,11 +2,17 @@
 namespace Sbnet\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+use CrEOF\Spatial\PHP\Types\Geometry\Point;
 
 /**
  * City
  *
- * @ORM\Table(name="city")
+ * @ORM\Table(name="city", indexes={
+ *  @ORM\Index(name="search_idx", columns={"search"}),
+ *  @ORM\Index(name="postcode_idx", columns={"post_code"})
+*  })
+ * @ORM\Table()
  * @ORM\Entity(repositoryClass="Sbnet\CoreBundle\Repository\CityRepository")
  */
 class City
@@ -41,6 +47,11 @@ class City
     private $status;
 
     /**
+     * @ORM\Column(name="population", type="integer", nullable=true)
+     */
+    private $population;
+
+    /**
      * @ORM\Column(name="department_code", type="string", length=255)
      */
     private $departmentCode;
@@ -49,6 +60,11 @@ class City
      * @ORM\Column(name="city_code", type="string", length=255)
      */
     private $cityCode;
+
+    /**
+     * @ORM\Column(name="post_code", type="string", length=255, nullable=true)
+     */
+    private $postCode;
 
     /**
      * @ORM\Column(name="coordinates", type="point", nullable=true)
@@ -61,15 +77,15 @@ class City
      */
     private $area;
 
-    // /**
-    //  * Get name
-    //  *
-    //  * @return string
-    //  */
-    // public function getInseeCode()
-    // {
-    //     return "{$this->departmentCode}{$this->cityCode}";
-    // }
+    /**
+     * Get Insee code
+     *
+     * @return string
+     */
+    public function getInseeCode()
+    {
+        return "{$this->departmentCode}{$this->cityCode}";
+    }
 
     /**
      * Get id
@@ -256,7 +272,7 @@ class City
      *
      * @return City
      */
-    public function setCoordinates(\Sbnet\CoreBundle\ORM\Point $coordinates)
+    public function setCoordinates(Point $coordinates)
     {
         $this->coordinates = $coordinates;
 
@@ -274,12 +290,50 @@ class City
     }
 
     /**
-     * Get insee
+     * Set population
+     *
+     * @param integer $population
+     *
+     * @return City
+     */
+    public function setPopulation($population)
+    {
+        $this->population = $population;
+
+        return $this;
+    }
+
+    /**
+     * Get population
      *
      * @return integer
      */
-    public function getInsee()
+    public function getPopulation()
     {
-        return (int)((string)$this->getDepartmentCode()+(string)$this->getCityCode());
+        return $this->population;
+    }
+
+    /**
+     * Set postCode
+     *
+     * @param string $postCode
+     *
+     * @return City
+     */
+    public function setPostCode($postCode)
+    {
+        $this->postCode = $postCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postCode
+     *
+     * @return string
+     */
+    public function getPostCode()
+    {
+        return $this->postCode;
     }
 }

@@ -3,6 +3,7 @@ namespace Tests\SbnetCoreBundle\Entity;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Sbnet\CoreBundle\Entity;
+use CrEOF\Spatial\PHP\Types\Geometry\Point;
 
 class CityTest extends KernelTestCase
 {
@@ -25,7 +26,7 @@ class CityTest extends KernelTestCase
 
     public function testSpatial()
     {
-        $point = new \Sbnet\CoreBundle\ORM\Point(1, 1);
+        $point = new Point(-73.7562317, 42.6525793);
 
         $ent = new \Sbnet\CoreBundle\Entity\City();
         $ent->setCoordinates($point);

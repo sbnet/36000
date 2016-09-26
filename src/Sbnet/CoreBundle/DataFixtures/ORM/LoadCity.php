@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sbnet\CoreBundle\Entity\City;
+use CrEOF\Spatial\PHP\Types\Geometry\Point;
 
 class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -14,6 +15,7 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
    * @var ContainerInterface
    */
   private $container;
+  private $logger;
 
   public function setContainer(ContainerInterface $container = null)
   {
@@ -29,8 +31,9 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
 
   public function load(ObjectManager $manager)
   {
+    $this->logger = $this->container->get('logger');
     $this->loadCities($manager);
-    $this->updateSpacial($manager);
+    $this->updateFromMongo($manager);
   }
 
   private function loadCities(ObjectManager $manager)
@@ -96,7 +99,7 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
     fclose($handle);
   }
 
-  private function updateSpacial(ObjectManager $manager)
+  private function updateFromMongo(ObjectManager $manager)
   {
     $batchSize = 20;
     $i = 1;
@@ -129,23 +132,19 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
               ->findOneByInseeCode($obj->insee);
 
       if ($city) {
-        $city->setCoordinates(new \Sbnet\CoreBundle\ORM\Point($obj->geo->lat, $obj->geo->lon));
+        $city->setCoordinates(new Point($obj->geo->lon, $obj->geo->lat));
+        $city->setPostCode($obj->code_postal);
+        $city->setSearch($obj->search);
+        $city->setPopulation($obj->population);
         $manager->persist($city);
       } else {
-        throw new \Exception("Can't find {$obj->insee} !");
+        $this->logger->warning("FIXTURES : Can't find {$obj->insee} !");
       }
 
       // Load the database in batch
       if (($i % $batchSize) === 0) {
-
-        try{
-          $manager->flush();
-          $manager->clear();
-        } catch (Exception $e) {
-            echo 'Exception reçue : ',  $e->getMessage(), "\n";
-            var_dump($city);
-        }
-
+        $manager->flush();
+        $manager->clear();
       }
 
       $i++;
