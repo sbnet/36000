@@ -1,6 +1,6 @@
 /**
  * Module dependencies.
- */ 
+ */
 require('./response');
 
 var express = require('express');
@@ -12,6 +12,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var regions = require('./routes/regions');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/regions', regions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,10 +63,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
 module.exports = app;
 
 if (module.parent === null) {
   app.listen(3000);
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  console.log("Express server listening on port 3000 in %s mode", app.settings.env);
+  // var p = app.address().port;
 }
