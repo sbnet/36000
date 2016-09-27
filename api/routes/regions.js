@@ -22,7 +22,6 @@ router.get('/', function(req, res, next) {
 
 /* Get a region by his ID */
 router.get('/id/:id', function(req, res, next) {
-
   var sql = "SELECT * FROM ?? WHERE ??=?";
   var inserts = ['region', 'id', req.params.id];
   sql = db.mysql.format(sql, inserts);
@@ -43,7 +42,6 @@ router.get('/id/:id', function(req, res, next) {
 
 /* Search for a region */
 router.get('/search/:q', function(req, res, next) {
-
   var sql = "SELECT * FROM ?? WHERE search LIKE ?";
   var inserts = ['region', '%' + req.params.q.toUpperCase() + '%'];
   sql = db.mysql.format(sql, inserts);
