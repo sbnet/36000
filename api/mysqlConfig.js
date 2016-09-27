@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-//http://www.developper-jeux-video.com/acces-mysql-nodejs/
+// https://github.com/mysqljs/mysql#introduction
 // Connect to mysql
 var connection = mysql.createConnection({
   user: "root",
@@ -10,5 +10,6 @@ var connection = mysql.createConnection({
 });
 
 module.exports = {
-  connection
+  connection,
+  mysql
 };

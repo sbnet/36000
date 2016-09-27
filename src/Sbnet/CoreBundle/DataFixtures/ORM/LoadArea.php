@@ -44,12 +44,12 @@ class LoadArea implements FixtureInterface, ContainerAwareInterface, OrderedFixt
       throw new \Exception("Can't read the file !");
     }
 
-    // By default logging of the SQL connection is set to the value of kernel.debug, 
-    // so if you have instantiated AppKernel with debug set to true the SQL commands 
+    // By default logging of the SQL connection is set to the value of kernel.debug,
+    // so if you have instantiated AppKernel with debug set to true the SQL commands
     // get stored in memory for each iteration.
     // http://stackoverflow.com/questions/9699185/memory-leaks-symfony2-doctrine2-exceed-memory-limit
     $manager->getConnection()->getConfiguration()->setSQLLogger(null);
-    
+
     // Skip the first line
     $data = fgetcsv($handle, 0, "\t");
 
@@ -65,15 +65,21 @@ class LoadArea implements FixtureInterface, ContainerAwareInterface, OrderedFixt
       $obj->setName($data[4]);
       $obj->setFormalName($data[5]);
       $obj->setRegion($region);
+
+      $search  = $data[4];
+      $char    = array("-", " ");
+      $replace = '';
+      $obj->setSearch(str_replace($char, $replace, $search));
+
       $manager->persist($obj);
 
       // Load the database in batch
       if (($i % $batchSize) == 0) {
         $manager->flush();
         $manager->clear();
-      }    
+      }
 
-      $i++;  
+      $i++;
     }
 
     $manager->flush();
