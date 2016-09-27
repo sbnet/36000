@@ -8,21 +8,21 @@ You are really welcome if you want to improve, point some mistakes or anything e
 ## List of functions
 
   * [Region access](regions)
-    * [Get all regions](regions all)
-    * [Get a region by his ID](region by id)
-    * [Search for a region by his name](regions by name)
+    * [Get all regions](regions-all)
+    * [Get a region by his ID](region-by-id)
+    * [Search for a region by his name](regions-search)
 
   * [Area access](areas)
-    * [Get all areas](areas all)
-    * [Get a area by his ID](area by id)
-    * [Search for a area by his name](areas by name)
+    * [Get all areas](areas-all)
+    * [Get a area by his ID](area-by-id)
+    * [Search for a area by his name](areas-by-name)
 
   * [City access](city)
 
 [regions]: regions
 ## Regions
 
-[regions all]: regions
+[regions all]: regions-all all
 ### getRegions
 
 Type: GET
@@ -33,7 +33,7 @@ Parameters: none
 
 Description: Get all the regions
 
-[region by id]: regions
+[region by id]: regions-by-id
 ### getRegionById
 
 Type: GET
@@ -49,7 +49,7 @@ Parameters:
 
 Description: Get all the regions
 
-[regions by name]: regions
+[regions by name]: regions-search
 ### searchRegion
 
 Type: GET
