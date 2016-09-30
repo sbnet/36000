@@ -34,6 +34,19 @@ describe('Area test', function(){
         });
   });
 
+  it('should get one areas by its Code', (done) => {
+    chai.request(app)
+        .get('/area/code/84')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.length.should.be.above(0);
+            res.body.should.be.a('array');
+            res.body[0].should.be.a('object');
+            res.body[0].should.have.property('name').eql('VAUCLUSE');
+          done();
+        });
+  });
+
   it('should search for vau', (done) => {
     chai.request(app)
         .get('/area/search/vau')
