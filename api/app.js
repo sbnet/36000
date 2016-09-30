@@ -12,9 +12,8 @@ var bodyParser = require('body-parser');
 // var morgan  = require('morgan');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var regions = require('./routes/regions');
-var areas = require('./routes/areas');
+var region = require('./routes/region');
+var area = require('./routes/area');
 
 var app = express();
 
@@ -31,9 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/regions', regions);
-app.use('/areas', areas);
+app.use('/region', region);
+app.use('/area', area);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,6 +68,5 @@ module.exports = app;
 
 if (module.parent === null) {
   app.listen(3000);
-  console.log("Express server listening on port 3000 in %s mode", app.settings.env);
-  // var p = app.address().port;
+  console.log("Express server listening on port %d in %s mode",app.address().port, app.settings.env);
 }

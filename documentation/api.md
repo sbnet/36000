@@ -7,53 +7,26 @@ You are really welcome if you want to improve, point some mistakes or anything e
 
 ## List of functions
 
-  * [Region access](#regions)
-    * [Get all regions](#getRegions)
-    * [Get a region by his ID](#getRegionById)
-    * [Search for a region by his name](#searchRegion)    
-  * [Area access](#areas)
-    * [Get all areas](#)
-    * [Get a area by his ID](#)
-    * [Search for a area by his name](#)
-  * [City access](#)
+  * [Region access](./api-region.md)
+    * Get all regions
+    * Get a region by his ID
+    * Search for a region by his name
+  * [Area access](./api-area.md)
+    * Get all areas
+    * Get a area by his ID
+    * Search for a area by his name
+  * [City access](./api-city.md)
+    * findOneByInsee
+    * findByPostalCode
+    * findByName
+    * findOneByGeoPoint
+    * findNearInsee
+    * findNearGeoPoint
+    * findNearPostalCode
 
-## Regions
+## Tests
+This api is tested with [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/) You need to have it installed before running the tests.
 
-### getRegions
-
-Type: GET
-
-URL: /regions
-
-Parameters: none
-
-Description: Get all the regions
-
-### getRegionById
-
-Type: GET
-
-URL: /regions/id/:id
-
-Parameters:
-
-|name |Type    |Description             |
-|-----|--------|------------------------|
-|id   |Integer |The id of region to get |
-
-
-Description: Get all the regions
-
-### searchRegion
-
-Type: GET
-
-URL: /region/search/:q
-
-Parameters:
-
-|name |Type    |Description             |
-|-----|--------|------------------------|
-|q    |string  |The name of the region to search |
-
-Description: Search for a region by its name.
+```
+npm install -g mocha
+```

@@ -1,5 +1,5 @@
 {
-  "name": "36000 API",
+  "name": "36000API",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "vows": "0.6.x"
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0"
   }
 }
