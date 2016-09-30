@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var db = require('../mysqlConfig.js');
 
-/* GET regions listing. */
+/* GET full listing */
 router.get('/', function(req, res, next) {
-  var q = 'SELECT * FROM region';
+  var q = 'SELECT * FROM area';
 
   db.connection.query(
     q,
@@ -20,10 +20,10 @@ router.get('/', function(req, res, next) {
   );
 });
 
-/* Get a region by his ID */
+/* Get by his ID */
 router.get('/id/:id', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ??=?";
-  var inserts = ['region', 'id', req.params.id];
+  var inserts = ['area', 'id', req.params.id];
   sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
@@ -40,10 +40,10 @@ router.get('/id/:id', function(req, res, next) {
   );
 });
 
-/* Search for a region */
+/* Search for an area */
 router.get('/search/:q', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ?? LIKE ?";
-  var inserts = ['region', 'search', '%' + req.params.q.toUpperCase() + '%'];
+  var inserts = ['area', 'name', '%' + req.params.q.toUpperCase() + '%'];
   sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
@@ -61,6 +61,6 @@ router.get('/search/:q', function(req, res, next) {
 });
 
 router.get('/search', function(req, res, next) {
-  res.render('regions-search', { title: 'Regions search' });
+  res.render('areas-search', { title: 'Areas search' });
 });
 module.exports = router;
