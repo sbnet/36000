@@ -2,12 +2,14 @@ var express = require('express');
 var router = express.Router();
 var db = require('../mysqlConfig.js');
 
-/* GET full listing */
-router.get('/', function(req, res, next) {
-  var q = 'SELECT * FROM area';
+/* Get by his ID */
+router.get('/id/:id', function(req, res, next) {
+  var sql = "SELECT * FROM ?? WHERE ??=?";
+  var inserts = ['city', 'id', req.params.id];
+  sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
-    q,
+    sql,
     function select(error, results, fields) {
       if(error){
         db.connection.end();
@@ -21,9 +23,9 @@ router.get('/', function(req, res, next) {
 });
 
 /* Get by his ID */
-router.get('/id/:id', function(req, res, next) {
+router.get('/postal/:id', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ??=?";
-  var inserts = ['area', 'id', req.params.id];
+  var inserts = ['city', 'post_code', req.params.id];
   sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
@@ -40,10 +42,11 @@ router.get('/id/:id', function(req, res, next) {
   );
 });
 
-/* Get by his code */
-router.get('/code/:id', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ??=?";
-  var inserts = ['area', 'code', req.params.id];
+/* Get by his INSEE */
+/* TODO: Should improve the concat as it can't be indexed !*/
+router.get('/insee/:insee', function(req, res, next) {
+  var sql = "SELECT * FROM ?? WHERE CONCAT(??, ??) = ?";
+  var inserts = ['city', 'department_code', 'city_code', req.params.insee];
   sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
@@ -60,10 +63,10 @@ router.get('/code/:id', function(req, res, next) {
   );
 });
 
-/* Search for an area */
+/* Search for city */
 router.get('/search/:q', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ?? LIKE ?";
-  var inserts = ['area', 'search', '%' + req.params.q.toUpperCase() + '%'];
+  var inserts = ['city', 'search', '%' + req.params.q.toUpperCase() + '%'];
   sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
