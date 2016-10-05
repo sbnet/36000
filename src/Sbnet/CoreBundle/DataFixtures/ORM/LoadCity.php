@@ -69,7 +69,7 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
         // Get the corresponding area
         $area = $manager
                   ->getRepository('SbnetCoreBundle:Area')
-                  ->findOneByCode($data[4]);
+                  ->findOneByCode($data[5]);
 
         $obj = new City;
         $obj->setStatus($data[0]);
