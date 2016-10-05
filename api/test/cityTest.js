@@ -1,10 +1,14 @@
 /*
-* findOneById
-* findOneByInsee
-* findByPostalCode
-* findByName
-* findNearGeoPoint
-* findNearPostalCode
+Paging
+
+Use limit and offset. It is flexible for the user and common in leading databases. The default should be limit=20 and offset=0
+
+GET /cars?offset=10&limit=5
+To send the total entries back to the user use the custom HTTP header: X-Total-Count.
+
+Links to the next or previous page should be provided in the HTTP header link as well. It is important to follow this link header values instead of constructing your own URLs.
+
+Link: <https://blog.mwaysolutions.com/sample/
 */
 var chai = require('chai');
 var chaiHttp = require('chai-http');
