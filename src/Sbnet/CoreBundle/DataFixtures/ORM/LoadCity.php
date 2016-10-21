@@ -32,8 +32,18 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
   public function load(ObjectManager $manager)
   {
     $this->logger = $this->container->get('logger');
+    $this->addStoredProcedure($manager);
     $this->loadCities($manager);
     $this->updateFromMongo($manager);
+  }
+
+  private function addStoredProcedure(ObjectManager $manager)
+  {
+    $sql = "CREATE FUNCTION `distance`(`a` POINT, `b` POINT) RETURNS DOUBLE DETERMINISTIC return round(glength(linestringfromwkb(linestring(asbinary(a), asbinary(b)))))";
+
+    $conn = $manager->getConnection();
+    $sth = $conn->prepare($sql);
+    $sth->execute();
   }
 
   private function loadCities(ObjectManager $manager)
