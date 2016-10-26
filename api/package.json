@@ -1,6 +1,6 @@
 {
-  "name": "36000API",
-  "version": "0.0.1",
+  "name": "36000api",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",

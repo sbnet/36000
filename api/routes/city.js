@@ -110,14 +110,16 @@ router.get('/search/:q', function(req, res, next) {
 
   Use this kind of query to get the cities
 
-  SELECT DISTINCT dest.zipcode, 11100*distance(orig.loc, dest.loc) as sdistance
-  FROM zipcode_spatial orig, zipcode_spatial dest
-  WHERE orig.zipcode = '84470'
-  having sdistance < 50
-  ORDER BY sdistance limit 10;
+  SELECT DISTINCT dest.post_code, 11100*distance(orig.coordinates, dest.coordinates) as sdistance
+    FROM city orig, city dest
+    WHERE orig.post_code = '84470'
+    having sdistance < 50
+    ORDER BY sdistance limit 10
+
+    SELECT DISTINCT glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates))))))*100 AS sdistance FROM city orig, city dest WHERE orig.post_code = '84470' having sdistance < 50 ORDER BY sdistance limit 10
 */
 router.get('/near/:postcode', function(req, res, next) {
-  var sql =  "SELECT DISTINCT dest.*, 11100*distance(orig.coordinates, dest.coordinates) as sdistance ";
+  var sql =  "SELECT DISTINCT dest.*, 11100*glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates)))))) as sdistance ";
       sql += "FROM city orig, city dest ";
       sql += "WHERE orig.post_code = ? ";
       sql += "having sdistance < ? ";
