@@ -109,14 +109,17 @@ router.get('/search/:q', function(req, res, next) {
   CREATE FUNCTION `distance`(`a` POINT, `b` POINT) RETURNS DOUBLE DETERMINISTIC return round(glength(linestringfromwkb(linestring(asbinary(a), asbinary(b)))))
 
   Use this kind of query to get the cities
+  SELECT DISTINCT glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates))))))*100 AS sdistance
+  FROM city orig, city dest
+  WHERE orig.post_code = '84470' having sdistance < 50
+  ORDER BY sdistance limit 10
 
+  This one seems to fail with mysql 5.5
   SELECT DISTINCT dest.post_code, 11100*distance(orig.coordinates, dest.coordinates) as sdistance
     FROM city orig, city dest
     WHERE orig.post_code = '84470'
     having sdistance < 50
     ORDER BY sdistance limit 10
-
-    SELECT DISTINCT glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates))))))*100 AS sdistance FROM city orig, city dest WHERE orig.post_code = '84470' having sdistance < 50 ORDER BY sdistance limit 10
 */
 router.get('/near/:postcode', function(req, res, next) {
   var sql =  "SELECT DISTINCT dest.*, 11100*glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates)))))) as sdistance ";
