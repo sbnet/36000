@@ -1,3 +1,7 @@
 sbnet_front_homepage:
     path:     /
     defaults: { _controller: SbnetFrontBundle:Default:index }
+
+sbnet_front_search:
+    path:     /search
+    defaults: { _controller: SbnetFrontBundle:Default:search }

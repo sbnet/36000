@@ -2,14 +2,46 @@
 {% extends "SbnetFrontBundle::layout.html.twig" %}
 
 {% block title %}
-  Page d'accueil - {{ parent() }}
+  Bienvenue sur - {{ parent() }}
 {% endblock %}
 
 {% block content %}
-  <h2>Page d'accueil de notre site</h2>
+  <div class="jumbotron wide">
+    <div class="container">
+      <div class="col-lg-9 col-lg-offset-4 text-center">
+        <h1>Bienvenue sur 36000.fr</h1>
+        <p>36000.fr, base documentaire gratuite sur toutes les communes de France : données géographiques, données démographiques, sites des mairies... Il est aussi possible de faire des recherches par proximité géographique. Vous cherchez la liste des communes francaises ? Alors vous avez trouvé ! 36000 offre gratuitement les informations essentielles pour chaque ville de France, de la commune de 30 habitants aux grands centres urbains de l'Hexagone.</p>
+      </div>
+    </div>
+  </div>
 
-  <h3>Titre</h3>
-  <p>
-    Bla bla bla...
-  </p>
+  <div class="row" id="index-search">
+    <div class="col-lg-8 col-lg-offset-2">
+      <p class="text-center text-success lead">Pour trouver une ville, saisissez son nom ou son code postal</p>
+      <div class="input-group">
+          <input type="text" class="form-control" placeholder="Nom ou code postal" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Trouver</button>
+          </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Heading</h2>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>Heading</h2>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+   </div>
+    <div class="col-md-4">
+      <h2>Heading</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+  </div>
 {% endblock %}

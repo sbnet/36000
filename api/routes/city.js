@@ -82,7 +82,8 @@ router.get('/insee/:insee', function(req, res, next) {
 /* Search for city */
 router.get('/search/:q', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ?? LIKE ?";
-  var inserts = ['city', 'search', '%' + req.params.q.toUpperCase() + '%'];
+  var input = parseSearchInput(req.params.q);
+  var inserts = ['city', 'search', '%' + input + '%'];
   sql = db.mysql.format(sql, inserts);
 
   db.connection.query(
@@ -147,8 +148,17 @@ router.get('/near/:postcode', function(req, res, next) {
   );
 });
 
-
 router.get('/search', function(req, res, next) {
   res.render('areas-search', { title: 'Areas search' });
 });
+
+function parseSearchInput(input) {
+  var parsed = input
+                .replace(/[^A-Z0-9]+/ig, '')
+                .toUpperCase();
+
+  return parsed;
+}
+
+
 module.exports = router;
