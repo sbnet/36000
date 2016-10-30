@@ -152,6 +152,12 @@ router.get('/search', function(req, res, next) {
   res.render('areas-search', { title: 'Areas search' });
 });
 
+/**
+ * Parse the imput, keep only alpha-numeric chars and make the string uppercase
+ *
+ * @param {string} The imput string to parse
+ * @return {string} The parsed string
+ */
 function parseSearchInput(input) {
   var parsed = input
                 .replace(/[^A-Z0-9]+/ig, '')
