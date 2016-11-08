@@ -32,3 +32,7 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+#sbnet_front:
+#  apiaccess:
+#    url: http://api.36000.fr/

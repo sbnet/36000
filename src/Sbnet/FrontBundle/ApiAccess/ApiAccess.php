@@ -17,10 +17,10 @@ class ApiAccess
     $cities = [];
 
     if (is_numeric($q)) {
-      $r = $this->restClient->get("http://api.36000.fr/city/postal/$q");
+      $r = $this->restClient->get($this->url."city/postal/$q");
       $cities = json_decode($r->getContent());
     } else {
-      $r = $this->restClient->get("http://localhost:3000/city/search/$q");
+      $r = $this->restClient->get($this->url."city/search/$q");
       $cities = json_decode($r->getContent());
     }
 

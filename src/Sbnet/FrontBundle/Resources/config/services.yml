@@ -5,3 +5,4 @@ services:
           - "@circle.restclient"
           #- http://localhost:3000/
           - http://api.36000.fr/
+          #- %sbnet_front.apiaccess.url%
