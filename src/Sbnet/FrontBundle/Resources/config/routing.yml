@@ -5,3 +5,7 @@ sbnet_front_homepage:
 sbnet_front_search:
     path:     /search
     defaults: { _controller: SbnetFrontBundle:Default:search }
+
+sbnet_front_city:
+    path:     /city/{id}-{post_code}-{name}
+    defaults: { _controller: SbnetFrontBundle:Default:city }

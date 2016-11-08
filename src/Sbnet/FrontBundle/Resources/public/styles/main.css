@@ -1,7 +1,7 @@
 body { padding-top: 70px; }
 
 #index-search { padding-bottom: 50px; }
-
+#index-search input {margin-bottom: 10px; }
 .navbar-right{ padding-right: 50px; }
 
 .wide {

@@ -31,7 +31,7 @@
 
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Toutes les villes de France</a>
+          <a class="navbar-brand" href="{{ path('sbnet_front_homepage') }}">Toutes les villes de France</a>
         </div>
         <form class="navbar-form navbar-right" role="search" action="{{ path('sbnet_front_search') }}" method="post">
           <input type="text" class="form-control" placeholder="Nom ou code postal" name="q">

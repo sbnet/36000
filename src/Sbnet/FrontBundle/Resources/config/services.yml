@@ -3,6 +3,5 @@ services:
         class: Sbnet\FrontBundle\ApiAccess\ApiAccess
         arguments:
           - "@circle.restclient"
-          #- http://localhost:3000/
-          - http://api.36000.fr/
+          - http://api.36000.fr
           #- %sbnet_front.apiaccess.url%

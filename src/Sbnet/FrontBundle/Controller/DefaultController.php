@@ -28,4 +28,9 @@ class DefaultController extends Controller
         "cities" => $cities
       ));
     }
+
+    public function cityAction(Request $request)
+    {
+      $id = $request->get('id');
+    }
 }
