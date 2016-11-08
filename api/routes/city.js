@@ -22,7 +22,7 @@ router.get('/id/:id', function(req, res, next) {
   );
 });
 
-/* Get by his ID */
+/* Get by his post code */
 router.get('/postal/:id', function(req, res, next) {
 
   // If full data is required
@@ -81,7 +81,7 @@ router.get('/insee/:insee', function(req, res, next) {
 
 /* Search for city */
 router.get('/search/:q', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ?? LIKE ?";
+  var sql = "SELECT * FROM ?? WHERE ?? LIKE ? ORDER BY `post_code`";
   var input = parseSearchInput(req.params.q);
   var inserts = ['city', 'search', '%' + input + '%'];
   sql = db.mysql.format(sql, inserts);

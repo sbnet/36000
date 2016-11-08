@@ -1,4 +1,7 @@
 services:
-#    sbnet_front.example:
-#        class: Sbnet\FrontBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    sbnet_front.apiaccess:
+        class: Sbnet\FrontBundle\ApiAccess\ApiAccess
+        arguments:
+          - "@circle.restclient"
+          #- http://localhost:3000/
+          - http://api.36000.fr/

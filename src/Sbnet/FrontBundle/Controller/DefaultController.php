@@ -15,26 +15,17 @@ class DefaultController extends Controller
 
     public function searchAction(Request $request)
     {
-      // Si la requête est en POST
+      // if it's a POST
       if ($request->isMethod('POST')) {
-        $cities = [];
-        $restClient = $this->container->get("circle.restclient");
-
-        $search = $request->get('q');
-        if (is_numeric($search)) {
-          $r = $restClient->get("http://api.36000.fr/city/postal/$search");
-          $city = json_decode($r->getContent());
-        } else {
-          $r = $restClient->get("http://api.36000.fr/city/search/$search");
-          $city = json_decode($r->getContent());
-        }
-var_dump($city);
-exit;
+        $geo = $this->container->get("sbnet_front.apiaccess");
+        $cities = $geo->search($request->get('q'));
       } else {
         $this->addFlash('message', 'Il y a eu un problème avec la recherche, essayez à nouveau');
         return $this->redirectToRoute('sbnet_front_homepage');
       }
 
-      return $this->render('SbnetFrontBundle:Default:search.html.twig');
+      return $this->render('SbnetFrontBundle:Default:search.html.twig', array(
+        "cities" => $cities
+      ));
     }
 }
