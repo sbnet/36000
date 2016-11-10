@@ -5,24 +5,6 @@
   Votre recherche - {{ parent() }}
 {% endblock %}
 
-{#
-object(stdClass)[910]
-  public 'id' => int 1682
-  public 'area_id' => int 4
-  public 'name' => string 'Châteauneuf-Miravail' (length=21)
-  public 'prefix' => null
-  public 'search' => string 'CHATEAUNEUFMIRAVAIL' (length=19)
-  public 'status' => int 1
-  public 'population' => int 79
-  public 'department_code' => string '04' (length=2)
-  public 'city_code' => string '051' (length=3)
-  public 'post_code' => string '04200' (length=5)
-  public 'coordinates' =>
-    object(stdClass)[913]
-      public 'x' => float 0.0997747
-      public 'y' => float 0.770563
-#}
-
 {% block content %}
   <h1>Résultats de votre recherche</h1>
     <p>Il y a {{ cities|length }} villes qui correspondent à votre recherche</p>
