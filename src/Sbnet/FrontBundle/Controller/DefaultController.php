@@ -31,6 +31,11 @@ class DefaultController extends Controller
 
     public function cityAction(Request $request)
     {
-      $id = $request->get('id');
+      $geo = $this->container->get("sbnet_front.apiaccess");
+      $city = $geo->getById($request->get('id'));
+
+      return $this->render('SbnetFrontBundle:Default:city.html.twig', array(
+        "city" => $city
+      ));
     }
 }

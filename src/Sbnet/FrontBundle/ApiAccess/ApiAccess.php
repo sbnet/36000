@@ -26,4 +26,13 @@ class ApiAccess
 
     return $cities;
   }
+
+  public function getById($id)
+  {
+    $r = $this->restClient->get($this->url."/city/id/$id?full");
+    $city = json_decode($r->getContent());
+
+    // @TODO: check for errors, the API may return an error if not found
+    return $city[0];
+  }
 }
