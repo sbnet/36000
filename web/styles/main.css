@@ -11,3 +11,9 @@ body { padding-top: 70px; }
   background-image:url('../images/paris_france_eiffel_tower_9662_1920x1080.jpg');
   background-size:cover;
 }
+
+#regions li{
+  display: inline;
+  list-style: none; /* pour enlever les puces sur IE7 */
+  margin: 10px;
+}
