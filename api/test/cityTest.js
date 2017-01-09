@@ -1,15 +1,3 @@
-/*
-Paging
-
-Use limit and offset. It is flexible for the user and common in leading databases. The default should be limit=20 and offset=0
-
-GET /cars?offset=10&limit=5
-To send the total entries back to the user use the custom HTTP header: X-Total-Count.
-
-Links to the next or previous page should be provided in the HTTP header link as well. It is important to follow this link header values instead of constructing your own URLs.
-
-Link: <https://blog.mwaysolutions.com/sample/
-*/
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../app');
@@ -28,6 +16,21 @@ describe('City test', function(){
             res.body.should.be.a('array');
             res.body[0].should.be.a('object');
             res.body[0].should.have.property('name').eql('Châteauneuf-de-Gadagne');
+            res.body[0].should.not.have.property('country_name');
+          done();
+        });
+  });
+
+  it('should get one city by its ID but with full data', (done) => {
+    chai.request(app)
+        .get('/city/id/36657?full')
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.length.should.be.above(0);
+            res.body.should.be.a('array');
+            res.body[0].should.be.a('object');
+            res.body[0].should.have.property('name').eql('Châteauneuf-de-Gadagne');
+            res.body[0].should.have.property('country_name').eql('FRANCE');
           done();
         });
   });

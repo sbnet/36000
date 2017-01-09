@@ -31,8 +31,13 @@ class ApiAccess
   {
     $r = $this->restClient->get($this->url."/city/id/$id?full");
     $city = json_decode($r->getContent());
+    $city = $city[0];
+
+    // Add dregres coordinates from radian
+    $city->coordinates->lon = number_format(rad2deg($city->coordinates->x), 5, '.', '');
+    $city->coordinates->lat = number_format(rad2deg($city->coordinates->y), 5, '.', '');
 
     // @TODO: check for errors, the API may return an error if not found
-    return $city[0];
+    return $city;
   }
 }

@@ -22,7 +22,6 @@ router.get('/id/:id', function(req, res, next) {
 
   var inserts = [req.params.id];
   sql = db.mysql.format(sql, inserts);
-console.log(sql);
 
   db.connection.query(
     sql,
@@ -122,8 +121,6 @@ router.get('/search/:q', function(req, res, next) {
   It need the following stored function that calculate the distance between two points
   This is an aproximation, it is not accurate if the 2 points are near the poles as the calculation is not mapped on a sphere
   but on a straight line
-
-  CREATE FUNCTION `distance`(`a` POINT, `b` POINT) RETURNS DOUBLE DETERMINISTIC return round(glength(linestringfromwkb(linestring(asbinary(a), asbinary(b)))))
 
   Use this kind of query to get the cities
   SELECT DISTINCT glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates))))))*100 AS sdistance

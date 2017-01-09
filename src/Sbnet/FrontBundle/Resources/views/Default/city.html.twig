@@ -1,28 +1,31 @@
-{# On utilise ici le layout général, qui se situe dans ce même CoreBundle maintenant #}
+{# On utilise ici le layout général, qui se situe dans ce même bundle #}
 {% extends "SbnetFrontBundle::layout.html.twig" %}
 
 {% block title %}
   City - {{ parent() }}
 {% endblock %}
 
-{#
-object(stdClass)[910]
-  public 'id' => int 1682
-  public 'area_id' => int 4
-  public 'name' => string 'Châteauneuf-Miravail' (length=21)
-  public 'prefix' => null
-  public 'search' => string 'CHATEAUNEUFMIRAVAIL' (length=19)
-  public 'status' => int 1
-  public 'population' => int 79
-  public 'department_code' => string '04' (length=2)
-  public 'city_code' => string '051' (length=3)
-  public 'post_code' => string '04200' (length=5)
-  public 'coordinates' =>
-    object(stdClass)[913]
-      public 'x' => float 0.0997747
-      public 'y' => float 0.770563
-#}
-
 {% block content %}
   <h1>{{ city.prefix }}{{ city.name }}</h1>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <p>
+        La ville de {{ city.prefix }}{{ city.name }} est dans le département de {{ city.area_formal_name }} ({{ city.area_code }}), dans la région {{ city.region_formal_name }}.
+      </p>
+      <p>
+        La population de {{ city.prefix }}{{ city.name }} est au nombre de {{ city.population|number_format(0, '.', ' ') }} habitants. Ses habitants sont appelés des ??
+      </p>
+      <p>
+        Son code postal est le {{ city.post_code }} et son code insee unique est le {{ city.department_code }}{{ city.city_code }}
+      </p>
+    </div>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4">
+      {{ dump(city) }}
+    </div>
+  </div>
+
+
 {% endblock %}
