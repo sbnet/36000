@@ -40,4 +40,14 @@ class ApiAccess
     // @TODO: check for errors, the API may return an error if not found
     return $city;
   }
+
+  public function getRegions()
+  {
+    $r = $this->restClient->get($this->url."/region");
+    $regions = json_decode($r->getContent());
+
+    // @TODO: check for errors, the API may return an error if not found
+    return $regions;
+  }
+
 }

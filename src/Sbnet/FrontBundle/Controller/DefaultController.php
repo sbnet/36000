@@ -10,7 +10,12 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SbnetFrontBundle:Default:index.html.twig');
+      $geo = $this->container->get("sbnet_front.apiaccess");
+      $regions = $geo->getRegions();
+
+      return $this->render('SbnetFrontBundle:Default:index.html.twig', array(
+        "regions" => $regions
+      ));
     }
 
     public function searchAction(Request $request)

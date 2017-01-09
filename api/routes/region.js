@@ -4,7 +4,7 @@ var db = require('../mysqlConfig.js');
 
 /* GET regions listing. */
 router.get('/', function(req, res, next) {
-  var q = 'SELECT * FROM region';
+  var q = 'SELECT * FROM region ORDER BY name';
 
   db.connection.query(
     q,
