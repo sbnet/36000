@@ -5,16 +5,28 @@ namespace Sbnet\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-      $geo = $this->container->get("sbnet_front.apiaccess");
-      $regions = $geo->getRegions();
+      $cache = new FilesystemAdapter();
+      $cRegions = $cache->getItem('front.regions');
+
+      if (!$cRegions->isHit()) {
+          // regions does not exists in the cache
+          $geo = $this->container->get("sbnet_front.apiaccess");
+          $regions = $geo->getRegions();
+
+          // Save it to the cache (permanently, see : https://symfony.com/doc/3.1/components/cache/cache_items.html#cache-item-expiration)
+          $cRegions->set($regions);
+          $cache->save($cRegions);
+          var_dump("missed");
+      }
 
       return $this->render('SbnetFrontBundle:Default:index.html.twig', array(
-        "regions" => $regions
+        "regions" => $cRegions->get()
       ));
     }
 
