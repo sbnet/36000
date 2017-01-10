@@ -5,9 +5,12 @@
   City - {{ parent() }}
 {% endblock %}
 
+{% block navTitle %}
+  {{ parent() }} - {{ city.prefix }}{{ city.name }}
+{% endblock %}
+
 {% block content %}
   <h1>{{ city.prefix }}{{ city.name }}</h1>
-
   <div class="row">
     <div class="col-lg-4">
       <p>
@@ -22,10 +25,27 @@
     </div>
     <div class="col-lg-4">
     </div>
-    <div class="col-lg-4">
-      {{ dump(city) }}
+    <div class="col-lg-4" id="map">
     </div>
   </div>
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script>
+    function initMap() {
+      var myLatLng = { lat: {{ city.coordinates.lat }}, lng: {{ city.coordinates.lon }} };
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: myLatLng
+      });
 
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNvgrvBlskve9mtJ0ufV2j-CuXMoy8fNE&callback=initMap" async defer></script>
 {% endblock %}

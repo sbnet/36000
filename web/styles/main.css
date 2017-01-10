@@ -2,7 +2,7 @@ body { padding-top: 70px; }
 
 #index-search { padding-bottom: 50px; }
 #index-search input {margin-bottom: 10px; }
-.navbar-right{ padding-right: 50px; }
+.navbar-right { padding-right: 50px; }
 
 .wide {
   width:100%;
@@ -12,8 +12,14 @@ body { padding-top: 70px; }
   background-size:cover;
 }
 
-#regions li{
+#regions li {
   display: inline;
   list-style: none; /* pour enlever les puces sur IE7 */
   margin: 10px;
+}
+
+#map {
+  height: 430px;
+  position: relative;
+  /*width: 100%;*/
 }

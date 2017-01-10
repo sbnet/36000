@@ -31,7 +31,7 @@
 
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{{ path('sbnet_front_homepage') }}">Toutes les villes de France</a>
+          <a class="navbar-brand" href="{{ path('sbnet_front_homepage') }}">{% block navTitle %}Toutes les villes de France{% endblock %}</a>
         </div>
         <form class="navbar-form navbar-right" role="search" action="{{ path('sbnet_front_search') }}" method="post">
           <input type="text" class="form-control" placeholder="Nom ou code postal" name="q">
@@ -56,7 +56,6 @@
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
     {% endblock %}
   </body>
 </html>
