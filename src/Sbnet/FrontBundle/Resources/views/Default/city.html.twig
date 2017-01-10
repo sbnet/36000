@@ -2,7 +2,7 @@
 {% extends "SbnetFrontBundle::layout.html.twig" %}
 
 {% block title %}
-  {{ city.prefix }}{{ city.name }} - {{ parent() }}  
+  {{ city.prefix }}{{ city.name }} - {{ parent() }}
 {% endblock %}
 
 {% block navTitle %}
@@ -43,7 +43,7 @@
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: 'Hello World!'
+        title: '{{ city.prefix }}{{ city.name }}'
       });
     }
   </script>
