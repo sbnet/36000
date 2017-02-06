@@ -22,6 +22,7 @@ router.get('/id/:id', function(req, res, next) {
             if(error){
                 res.send(JSON.stringify(error));
             }
+            result = api.parseId('city', result);
             res.send(JSON.stringify(result));
         });
     }
@@ -37,6 +38,7 @@ router.get('/postal/:id', function(req, res, next) {
             if(error){
                 res.send(JSON.stringify(error));
             }
+            result = api.parseId('city', result);
             res.send(JSON.stringify(result));
         });
     } else {
@@ -44,6 +46,7 @@ router.get('/postal/:id', function(req, res, next) {
             if(error){
                 res.send(JSON.stringify(error));
             }
+            result = api.parseId('city', result);
             res.send(JSON.stringify(result));
         });
     }
@@ -57,6 +60,7 @@ router.get('/insee/:insee', function(req, res, next) {
         if(error){
             res.send(JSON.stringify(error));
         }
+        result = api.parseId('city', result);
         res.send(JSON.stringify(result));
     });
 });
