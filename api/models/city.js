@@ -84,3 +84,20 @@ exports.getByPostalFull = function(id, done) {
         }
     );
 }
+
+/* TODO: Should improve the concat as it can't be indexed !*/
+exports.getByInsee = function(insee, done) {
+    var sql = "SELECT * FROM city WHERE CONCAT(department_code, city_code) = ?";
+    sql = db.mysql.format(sql, insee);
+
+    db.connection.query(
+        sql,
+        function select(error, results, fields) {
+            if(error) {
+                db.connection.end();
+                return done(error);
+            }
+            done(null, results);
+        }
+    );
+}

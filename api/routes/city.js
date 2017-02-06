@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var city = require('../models/city.js');
+var config = require('../config.js');
+var api = require('../api.js');
 
 /* Get by his ID */
 router.get('/id/:id', function(req, res, next) {
@@ -12,6 +14,7 @@ router.get('/id/:id', function(req, res, next) {
             if(error){
                 res.send(JSON.stringify(error));
             }
+            result = api.parseId('city', result);
             res.send(JSON.stringify(result));
         });
     } else {
@@ -47,25 +50,15 @@ router.get('/postal/:id', function(req, res, next) {
 
 });
 
-/* Get by his INSEE */
-/* TODO: Should improve the concat as it can't be indexed !*/
+/* Get by his INSEE code */
 router.get('/insee/:insee', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE CONCAT(??, ??) = ?";
-  var inserts = ['city', 'department_code', 'city_code', req.params.insee];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
-      if(error){
-        db.connection.end();
-        return;
-      }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+    res.setHeader('Content-Type', 'application/json');
+    city.getByInsee(req.params.insee, function(error, result) {
+        if(error){
+            res.send(JSON.stringify(error));
+        }
+        res.send(JSON.stringify(result));
+    });
 });
 
 /* Search for city */

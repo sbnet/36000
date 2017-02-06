@@ -1,8 +1,6 @@
 /**
- * Module dependencies.
+ *
  */
-require('./response');
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -32,14 +30,13 @@ app.use('/region', region);
 app.use('/area', area);
 app.use('/city', city);
 
+// error handlers
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace
