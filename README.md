@@ -1,4 +1,10 @@
 # 36000
+36000 is a city directory made with Symfony and a restful api made with node.js
+
+In the wiki section there is some documentation about :
+
+    * The [restful API](https://github.com/sbnet/36000/wiki)
+    * The [symfony service](#) used to access the API
 
 # Tests
 
