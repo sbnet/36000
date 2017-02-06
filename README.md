@@ -3,8 +3,9 @@
 
 In the wiki section there is some documentation about :
 
-    * The [restful API](https://github.com/sbnet/36000/wiki)
-    * The [symfony service](#) used to access the API
+* The [restful API](https://github.com/sbnet/36000/wiki)
+* The [symfony service](#) used to access the API
+* The [installation process](https://github.com/sbnet/36000/wiki/install)
 
 # Tests
 
