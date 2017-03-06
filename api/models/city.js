@@ -7,8 +7,8 @@
 var db = require('../mysqlConfig.js')
 
 exports.getBiggers = function(limit, done) {
-    var sql = db.mysql.format('SELECT * FROM city ORDER BY population LIMIT ?', limit);
-
+    var sql = 'SELECT * FROM city ORDER BY population DESC LIMIT ' + limit;
+console.log(sql);
     db.connection.query(
         sql,
         function select(error, results, fields) {

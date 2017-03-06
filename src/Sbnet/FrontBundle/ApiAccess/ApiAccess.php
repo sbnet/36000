@@ -15,10 +15,11 @@ class ApiAccess
   public function getBiggers($limit)
   {
     $r = $this->restClient->get($this->url."/city/biggers/$limit");
+var_dump($r);    
     $cities = json_decode($r->getContent());
     return $cities;
   }
-  
+
   public function search($q)
   {
     $cities = [];

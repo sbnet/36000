@@ -7,7 +7,7 @@ var api = require('../api.js');
 /* Get biggers cities */
 router.get('/biggers/:limit', function(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
-    city.getByInsee(req.params.limit, function(error, result) {
+    city.getBiggers(req.params.limit, function(error, result) {
         if(error){
             res.send(JSON.stringify(error));
         }

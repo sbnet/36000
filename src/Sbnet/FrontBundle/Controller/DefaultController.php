@@ -23,12 +23,13 @@ class DefaultController extends Controller
           $cache->save($cRegions);
       }
 
+      $cache->deleteItem('front.biggers');
       $cBiggers = $cache->getItem('front.biggers');
       if (!$cBiggers->isHit()) {
           // regions does not exists in the cache
           $geo = $this->container->get("sbnet_front.apiaccess");
           $biggers = $geo->getBiggers(15);
-
+var_dump($biggers);
           // Save it to the cache (permanently, see : https://symfony.com/doc/3.1/components/cache/cache_items.html#cache-item-expiration)
           $cBiggers->set($biggers);
           $cache->save($cBiggers);
