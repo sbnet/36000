@@ -79,23 +79,14 @@ router.get('/area/:id', function(req, res, next) {
 
 /* Search for city */
 router.get('/search/:q', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ?? LIKE ? ORDER BY `post_code`";
-  var input = parseSearchInput(req.params.q);
-  var inserts = ['city', 'search', '%' + input + '%'];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
-      if(error){
-        db.connection.end();
-        return;
-      }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+    res.setHeader('Content-Type', 'application/json');
+    city.search(req.params.q, function(error, result) {
+        if(error){
+            res.send(JSON.stringify(error));
+        }
+        result = api.parseId('city', result);
+        res.send(JSON.stringify(result));
+    });
 });
 
 /*
@@ -147,20 +138,5 @@ router.get('/near/:postcode', function(req, res, next) {
 router.get('/search', function(req, res, next) {
   res.render('areas-search', { title: 'Areas search' });
 });
-
-/**
- * Parse the imput, keep only alpha-numeric chars and make the string uppercase
- *
- * @param {string} The imput string to parse
- * @return {string} The parsed string
- */
-function parseSearchInput(input) {
-  var parsed = input
-                .replace(/[^A-Z0-9]+/ig, '')
-                .toUpperCase();
-
-  return parsed;
-}
-
 
 module.exports = router;

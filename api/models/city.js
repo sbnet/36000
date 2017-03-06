@@ -117,3 +117,35 @@ exports.getByArea = function(id, done) {
         }
     );
 }
+
+exports.search = function(q, done) {
+    var sql = "SELECT * FROM city WHERE search LIKE ? ORDER BY `post_code`";
+    var input = parseSearchInput(q);
+    var inserts = ['%' + input + '%'];
+    sql = db.mysql.format(sql, inserts);
+
+    db.connection.query(
+        sql,
+        function select(error, results, fields) {
+            if(error) {
+                db.connection.end();
+                return done(error);
+            }
+            done(null, results);
+        }
+    );
+}
+
+/**
+ * Parse the imput, keep only alpha-numeric chars and make the string uppercase
+ *
+ * @param {string} The imput string to parse
+ * @return {string} The parsed string
+ */
+function parseSearchInput(input) {
+  var parsed = input
+                .replace(/[^A-Z0-9]+/ig, '')
+                .toUpperCase();
+
+  return parsed;
+}
