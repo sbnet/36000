@@ -22,18 +22,22 @@ module.exports = {
 
             if(typeof city !== 'undefined'){
                 record.city_id = this.apiUrl + this.areaUrl + city.value;
+                record.ncity_id = city.value;
             }
 
             if(typeof area !== 'undefined'){
                 record.area_id = this.apiUrl + this.areaUrl + area.value;
+                record.narea_id = area.value;
             }
 
             if(typeof region !== 'undefined'){
                 record.region_id = this.apiUrl + this.regionUrl + region.value;
+                record.nregion_id = region.value;
             }
 
             if(typeof country !== 'undefined'){
                 record.country_id = this.apiUrl + this.countryUrl + country.value;
+                record.ncountry_id = country.value;
             }
 
             if(typeof me !== 'undefined'){
