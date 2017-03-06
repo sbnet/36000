@@ -12,6 +12,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
       $cache = new FilesystemAdapter();
+      $cache->deleteItem('front.regions');
       $cRegions = $cache->getItem('front.regions');
 
       if (!$cRegions->isHit()) {
