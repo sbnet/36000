@@ -104,7 +104,7 @@ exports.getByInsee = function(insee, done) {
 
 exports.getByArea = function(id, done) {
     var sql = "SELECT * FROM city WHERE area_id = ? ORDER BY name";
-    sql = db.mysql.format(sql, insee);
+    sql = db.mysql.format(sql, id);
 
     db.connection.query(
         sql,

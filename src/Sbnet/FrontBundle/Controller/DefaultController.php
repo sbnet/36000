@@ -66,4 +66,16 @@ class DefaultController extends Controller
         "areas" => $areas
       ));
     }
+
+    public function areaAction(Request $request)
+    {
+      $geo = $this->container->get("sbnet_front.apiaccess");
+      $region = $geo->getRegionById($request->get('id'));
+      $area = $geo->getAreaId($region->id);
+
+      return $this->render('SbnetFrontBundle:Default:region.html.twig', array(
+        "region" => $region,
+        "areas" => $areas
+      ));
+    }
 }
