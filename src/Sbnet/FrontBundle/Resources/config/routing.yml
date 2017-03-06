@@ -9,3 +9,7 @@ sbnet_front_search:
 sbnet_front_city:
     path:     /city/{id}-{post_code}-{name}
     defaults: { _controller: SbnetFrontBundle:Default:city }
+
+sbnet_front_region:
+    path:     /region/{id}-{name}
+    defaults: { _controller: SbnetFrontBundle:Default:region }

@@ -40,6 +40,27 @@ router.get('/id/:id', function(req, res, next) {
   );
 });
 
+/* Get by his region_id */
+router.get('/regionid/:id', function(req, res, next) {
+  var sql = "SELECT * FROM area WHERE region_id=?";
+  var inserts = [req.params.id];
+  sql = db.mysql.format(sql, inserts);
+
+  db.connection.query(
+    sql,
+    function select(error, results, fields) {
+      if(error){
+        db.connection.end();
+        return;
+      }
+
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(results));
+    }
+  );
+});
+
+
 /* Get by his code */
 router.get('/code/:id', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ??=?";

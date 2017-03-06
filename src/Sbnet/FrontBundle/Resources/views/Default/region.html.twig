@@ -1,0 +1,14 @@
+{# On utilise ici le layout général, qui se situe dans ce même bundle #}
+{% extends "SbnetFrontBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ region.formal_name }} - {{ parent() }}
+{% endblock %}
+
+{% block navTitle %}
+  {{ parent() }} - {{ region.formal_name }}
+{% endblock %}
+
+{% block content %}
+  <h1>{{ region.formal_name }}</h1>
+{% endblock %}

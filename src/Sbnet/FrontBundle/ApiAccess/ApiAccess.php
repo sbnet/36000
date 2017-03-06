@@ -50,4 +50,21 @@ class ApiAccess
     return $regions;
   }
 
+  public function getAreasByRegion($region_id)
+  {
+    $r = $this->restClient->get($this->url."/area/regionid/$region_id");
+    $regions = json_decode($r->getContent());
+
+    // @TODO: check for errors, the API may return an error if not found
+    return $regions;
+  }
+
+  public function getRegionById($id)
+  {
+    $r = $this->restClient->get($this->url."/region/id/$id");
+    $region = json_decode($r->getContent());
+
+    // @TODO: check for errors, the API may return an error if not found
+    return $region[0];
+  }
 }

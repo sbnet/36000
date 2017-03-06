@@ -22,7 +22,6 @@ class DefaultController extends Controller
           // Save it to the cache (permanently, see : https://symfony.com/doc/3.1/components/cache/cache_items.html#cache-item-expiration)
           $cRegions->set($regions);
           $cache->save($cRegions);
-          var_dump("missed");
       }
 
       return $this->render('SbnetFrontBundle:Default:index.html.twig', array(
@@ -53,6 +52,16 @@ class DefaultController extends Controller
 
       return $this->render('SbnetFrontBundle:Default:city.html.twig', array(
         "city" => $city
+      ));
+    }
+
+    public function regionAction(Request $request)
+    {
+      $geo = $this->container->get("sbnet_front.apiaccess");
+      $region = $geo->getRegionById($request->get('id'));
+
+      return $this->render('SbnetFrontBundle:Default:region.html.twig', array(
+        "region" => $region
       ));
     }
 }
