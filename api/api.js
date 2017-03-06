@@ -39,6 +39,7 @@ module.exports = {
             if(typeof me !== 'undefined'){
                 var meUrl = '/' + tableName + '/id/';
                 record.id = this.apiUrl + meUrl + me.value;
+                record.nid = me.value;
             }
 
         }, this);

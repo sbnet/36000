@@ -70,12 +70,16 @@ class DefaultController extends Controller
     public function areaAction(Request $request)
     {
       $geo = $this->container->get("sbnet_front.apiaccess");
-      $region = $geo->getRegionById($request->get('id'));
-      $area = $geo->getAreaId($region->id);
 
-      return $this->render('SbnetFrontBundle:Default:region.html.twig', array(
+      $area = $geo->getAreaById($request->get('id'));
+      $region = $geo->getRegionById($area->region_id);
+      $cities = $geo->getCitiesByAreaId($request->get('id'));
+
+
+      return $this->render('SbnetFrontBundle:Default:area.html.twig', array(
         "region" => $region,
-        "areas" => $areas
+        "area" => $area,
+        "cities" => $cities
       ));
     }
 }
