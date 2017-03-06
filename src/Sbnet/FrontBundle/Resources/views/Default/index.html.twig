@@ -55,7 +55,7 @@
         <h2>Les villes</h2>
         <ul>
           {% for city in biggers %}
-            <li><a href="{{ path('sbnet_front_city', { 'id': city.nid, 'post_code': city.post_code, 'name': city.search|lower }) }}">{{ city.post_code }} - {{ city.prefix }}{{ city.name }}</a></li>
+            <li><a href="{{ path('sbnet_front_city', { 'id': city.nid, 'post_code': city.post_code, 'name': city.search|lower }) }}">{{ city.prefix }} {{ city.name }}</a></li>
           {% endfor %}
         </ul>
     </div>
