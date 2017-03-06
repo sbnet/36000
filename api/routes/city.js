@@ -65,6 +65,18 @@ router.get('/insee/:insee', function(req, res, next) {
     });
 });
 
+/* Get by his area_id */
+router.get('/area/:id', function(req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    city.getByArea(req.params.id, function(error, result) {
+        if(error){
+            res.send(JSON.stringify(error));
+        }
+        result = api.parseId('city', result);
+        res.send(JSON.stringify(result));
+    });
+});
+
 /* Search for city */
 router.get('/search/:q', function(req, res, next) {
   var sql = "SELECT * FROM ?? WHERE ?? LIKE ? ORDER BY `post_code`";

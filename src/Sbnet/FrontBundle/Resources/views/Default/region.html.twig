@@ -11,4 +11,11 @@
 
 {% block content %}
   <h1>{{ region.formal_name }}</h1>
+  <p>Il y a {{ areas|length }} départements dans cette région</p>
+  <ul>
+    {% for area in areas %}
+      <li><a href="{{ path('sbnet_front_area', { 'id': area.id, 'name': area.name|lower }) }}">{{ area.formal_name }}</a></li>
+    {% endfor %}
+  </ul>
+  {% dump(areas) %}
 {% endblock %}

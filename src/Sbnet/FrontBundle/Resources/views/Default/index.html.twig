@@ -37,7 +37,7 @@
       <h2>Les régions</h2>
       <ul>
         {% for region in regions %}
-          <li><a href="{{ path('sbnet_front_region', { 'id': region.id, 'name': region.formal_name }) }}">{{ region.formal_name }}</a></li>
+          <li><a href="{{ path('sbnet_front_region', { 'id': region.id, 'name': region.name|lower }) }}">{{ region.formal_name }}</a></li>
         {% endfor %}
       </ul>
     </div>

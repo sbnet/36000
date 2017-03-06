@@ -59,9 +59,11 @@ class DefaultController extends Controller
     {
       $geo = $this->container->get("sbnet_front.apiaccess");
       $region = $geo->getRegionById($request->get('id'));
+      $areas = $geo->getAreasByRegionId($region->id);
 
       return $this->render('SbnetFrontBundle:Default:region.html.twig', array(
-        "region" => $region
+        "region" => $region,
+        "areas" => $areas
       ));
     }
 }

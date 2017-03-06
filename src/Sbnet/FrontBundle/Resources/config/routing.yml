@@ -13,3 +13,7 @@ sbnet_front_city:
 sbnet_front_region:
     path:     /region/{id}-{name}
     defaults: { _controller: SbnetFrontBundle:Default:region }
+
+sbnet_front_area:
+    path:     /area/{id}-{name}
+    defaults: { _controller: SbnetFrontBundle:Default:area }
