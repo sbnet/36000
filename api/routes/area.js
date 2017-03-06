@@ -42,7 +42,7 @@ router.get('/id/:id', function(req, res, next) {
 
 /* Get by his region_id */
 router.get('/regionid/:id', function(req, res, next) {
-  var sql = "SELECT * FROM area WHERE region_id=?";
+  var sql = "SELECT * FROM area WHERE region_id=? ORDER BY name";
   var inserts = [req.params.id];
   sql = db.mysql.format(sql, inserts);
 
