@@ -1,0 +1,20 @@
+{# On utilise ici le layout général, qui se situe dans ce même bundle #}
+{% extends "SbnetFrontBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ area.formal_name }} - {{ parent() }}
+{% endblock %}
+
+{% block navTitle %}
+  {{ parent() }} - {{ area.formal_name }}
+{% endblock %}
+
+{% block content %}
+  <h1>{{ area.formal_name }}</h1>
+  <p>Il y a {{ cities|length }} villes dans cette région</p>
+  <ul>
+    {% for city in cities %}
+      <li><a href="{{ path('sbnet_front_city', { 'id': city.nid, 'post_code': city.post_code, 'name': city.name|lower }) }}">{{ city.post_code }} - {{ city.prefix }} {{ city.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
