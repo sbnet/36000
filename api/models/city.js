@@ -6,6 +6,21 @@
  */
 var db = require('../mysqlConfig.js')
 
+exports.getBiggers = function(limit, done) {
+    var sql = db.mysql.format('SELECT * FROM city ORDER BY population LIMIT ?', limit);
+
+    db.connection.query(
+        sql,
+        function select(error, results, fields) {
+            if(error) {
+                db.connection.end();
+                return done(error);
+            }
+            done(null, results);
+        }
+    );
+}
+
 exports.getById = function(id, done) {
     var sql = db.mysql.format('SELECT * FROM city WHERE id=?', id);
 

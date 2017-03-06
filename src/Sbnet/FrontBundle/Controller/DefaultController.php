@@ -13,7 +13,6 @@ class DefaultController extends Controller
     {
       $cache = new FilesystemAdapter();
       $cRegions = $cache->getItem('front.regions');
-
       if (!$cRegions->isHit()) {
           // regions does not exists in the cache
           $geo = $this->container->get("sbnet_front.apiaccess");
@@ -24,8 +23,20 @@ class DefaultController extends Controller
           $cache->save($cRegions);
       }
 
+      $cBiggers = $cache->getItem('front.biggers');
+      if (!$cBiggers->isHit()) {
+          // regions does not exists in the cache
+          $geo = $this->container->get("sbnet_front.apiaccess");
+          $biggers = $geo->getBiggers(15);
+
+          // Save it to the cache (permanently, see : https://symfony.com/doc/3.1/components/cache/cache_items.html#cache-item-expiration)
+          $cBiggers->set($biggers);
+          $cache->save($cBiggers);
+      }
+
       return $this->render('SbnetFrontBundle:Default:index.html.twig', array(
-        "regions" => $cRegions->get()
+        "regions" => $cRegions->get(),
+        "biggers" => $cBiggers->get()
       ));
     }
 
