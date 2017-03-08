@@ -72,6 +72,26 @@ class City
     private $coordinates;
 
     /**
+     * @ORM\Column(name="gentile", type="string", length=255, nullable=true)
+     */
+    private $gentile;
+
+    /**
+     * @ORM\Column(name="cityhall_web", type="string", length=255, nullable=true)
+     */
+    private $cityhallWeb;
+
+    /**
+     * @ORM\Column(name="cityhall_phone", type="string", length=255, nullable=true)
+     */
+    private $cityhallPhone;
+
+    /**
+     * @ORM\Column(name="mayor", type="string", length=255, nullable=true)
+     */
+    private $mayor;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Sbnet\CoreBundle\Entity\Area")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -335,5 +355,101 @@ class City
     public function getPostCode()
     {
         return $this->postCode;
+    }
+
+    /**
+     * Set gentile
+     *
+     * @param string $gentile
+     *
+     * @return City
+     */
+    public function setGentile($gentile)
+    {
+        $this->gentile = $gentile;
+
+        return $this;
+    }
+
+    /**
+     * Get gentile
+     *
+     * @return string
+     */
+    public function getGentile()
+    {
+        return $this->gentile;
+    }
+
+    /**
+     * Set cityhallWeb
+     *
+     * @param string $cityhallWeb
+     *
+     * @return City
+     */
+    public function setCityhallWeb($cityhallWeb)
+    {
+        $this->cityhallWeb = $cityhallWeb;
+
+        return $this;
+    }
+
+    /**
+     * Get cityhallWeb
+     *
+     * @return string
+     */
+    public function getCityhallWeb()
+    {
+        return $this->cityhallWeb;
+    }
+
+    /**
+     * Set cityhallPhone
+     *
+     * @param string $cityhallPhone
+     *
+     * @return City
+     */
+    public function setCityhallPhone($cityhallPhone)
+    {
+        $this->cityhallPhone = $cityhallPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get cityhallPhone
+     *
+     * @return string
+     */
+    public function getCityhallPhone()
+    {
+        return $this->cityhallPhone;
+    }
+
+    /**
+     * Set mayor
+     *
+     * @param string $mayor
+     *
+     * @return City
+     */
+    public function setMayor($mayor)
+    {
+        $this->mayor = $mayor;
+
+        return $this;
+    }
+
+    /**
+     * Get mayor
+     *
+     * @return string
+     */
+    public function getMayor()
+    {
+        return $this->mayor;
     }
 }

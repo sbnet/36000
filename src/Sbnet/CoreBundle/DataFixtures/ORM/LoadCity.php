@@ -35,11 +35,27 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
     $this->addStoredProcedure($manager);
     $this->loadCities($manager);
     $this->updateFromMongo($manager);
+    $this->loadExceptions($manager);
   }
 
   private function addStoredProcedure(ObjectManager $manager)
   {
     $sql = "CREATE FUNCTION `distance`(`a` POINT, `b` POINT) RETURNS DOUBLE DETERMINISTIC return round(glength(linestringfromwkb(linestring(asbinary(a), asbinary(b)))))";
+
+    $conn = $manager->getConnection();
+    $sth = $conn->prepare($sql);
+    $sth->execute();
+  }
+
+  private function loadExceptions(ObjectManager $manager)
+  {
+    $file = $this->container->getParameter('kernel.root_dir').'/../data/cities-exceptions.sql';
+
+    if (!file_exists($file)) {
+        throw new \Exception("Data file ($file) is not present !");
+    }
+
+    $sql = file_get_contents($file);
 
     $conn = $manager->getConnection();
     $sth = $conn->prepare($sql);
@@ -146,6 +162,19 @@ class LoadCity implements FixtureInterface, ContainerAwareInterface, OrderedFixt
         $city->setPostCode($obj->code_postal);
         $city->setSearch($obj->search);
         $city->setPopulation($obj->population);
+
+        if(property_exists($obj, 'gentile'))
+            $city->setGentile($obj->gentile);
+
+        if(property_exists($obj, 'mairie'))
+            $city->setCityhallWeb($obj->mairie);
+
+        if(property_exists($obj, 'tel_mairie'))
+            $city->setCityhallPhone($obj->tel_mairie);
+
+        if(property_exists($obj, 'maire'))
+            $city->setMayor($obj->maire);
+
         $manager->persist($city);
       } else {
         $this->logger->warning("FIXTURES : Can't find {$obj->insee} !");
