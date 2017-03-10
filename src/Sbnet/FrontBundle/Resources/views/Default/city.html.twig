@@ -17,7 +17,10 @@
         La ville de {{ city.prefix }}{{ city.name }} est dans le département de {{ city.area_formal_name }} ({{ city.area_code }}), dans la région {{ city.region_formal_name }}.
       </p>
       <p>
-        La population de {{ city.prefix }}{{ city.name }} est au nombre de {{ city.population|number_format(0, '.', ' ') }} habitants. Ses habitants sont appelés des ??
+        La population de {{ city.prefix }}{{ city.name }} est au nombre de {{ city.population|number_format(0, '.', ' ') }} habitants.
+        {% if city.gentile is not empty %}
+            Ses habitants sont appelés des {{ city.gentile }}.
+        {% endif %}
       </p>
       <p>
         Son code postal est le {{ city.post_code }} et son code insee unique est le {{ city.department_code }}{{ city.city_code }}

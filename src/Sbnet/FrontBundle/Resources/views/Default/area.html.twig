@@ -14,7 +14,9 @@
   <p>Il y a {{ cities|length }} villes dans cette région</p>
   <ul>
     {% for city in cities %}
-      <li><a href="{{ path('sbnet_front_city', { 'id': city.nid, 'post_code': city.post_code, 'name': city.name|lower }) }}">{{ city.post_code }} - {{ city.prefix }} {{ city.name }}</a></li>
+        {% if city.post_code is not empty %}
+            <li><a href="{{ path('sbnet_front_city', { 'id': city.nid, 'post_code': city.post_code, 'name': city.name|lower }) }}">{{ city.post_code }} - {{ city.prefix }} {{ city.name }}</a></li>
+      {% endif %}
     {% endfor %}
   </ul>
 {% endblock %}
