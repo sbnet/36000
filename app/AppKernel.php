@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Sbnet\CoreBundle\SbnetCoreBundle(),
             new Sbnet\FrontBundle\SbnetFrontBundle(),
+            new Sbnet\WeatherBundle\SbnetWeatherBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

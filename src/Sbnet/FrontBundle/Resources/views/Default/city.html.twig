@@ -27,6 +27,13 @@
       </p>
     </div>
     <div class="col-lg-4">
+        <h2>La météo sur {{ city.prefix }}{{ city.name }}</h2>
+        <p class="pnospace">Temperature : {{ forecast.list[0].main.temp | number_format(0, '.', ' ') }}°C</p>
+        <p class="pnospace">Pression : {{ forecast.list[0].main.pressure | number_format(0, '.', ' ') }} hpa</p>
+        <p class="pnospace">Humidité : {{ forecast.list[0].main.humidity | number_format(0, '.', ' ') }}%</p>
+        <p class="pnospace">Vent : {{ forecast.list[0].wind.speed | number_format(0, '.', ' ') }} Kmh</p>
+        <p class="pnospace">Temps : {{ forecast.list[0].weather[0].description }}</p>
+    {{ dump(forecast) }}
     </div>
     <div class="col-lg-4" id="map">
     </div>
