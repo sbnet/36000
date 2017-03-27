@@ -5,7 +5,7 @@ php:
   - hhvm
 
 install:
-  - composer install 
+  - composer install
 
 mysql:
   database: 36000
