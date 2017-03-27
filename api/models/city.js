@@ -3,6 +3,7 @@
  *
  * @author Stéphane BRUN - stephane@sbnet.fr
  * @see https://www.terlici.com/2015/08/13/mysql-node-express.html
+ * @see https://github.com/mysqljs/mysql
  */
 var db = require('../mysqlConfig.js')
 
@@ -138,6 +139,47 @@ exports.search = function(q, done) {
     var input = parseSearchInput(q);
     var inserts = ['%' + input + '%'];
     sql = db.mysql.format(sql, inserts);
+
+    db.connection.query(
+        sql,
+        function select(error, results, fields) {
+            if(error) {
+                db.connection.end();
+                return done(error);
+            }
+            done(null, results);
+        }
+    );
+}
+
+/**
+ * Search by postal code for cities near another one
+ *
+ * It need the following stored function that calculate the distance between two points
+ * This is an aproximation, it is not accurate if the 2 points are near the poles as the calculation is not mapped on a sphere
+ * but on a straight line
+ *
+ * Use this kind of query to get the cities
+ * SELECT DISTINCT glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates))))))*100 AS sdistance
+ * FROM city orig, city dest
+ * WHERE orig.post_code = '84470' having sdistance < 50
+ * ORDER BY sdistance limit 10
+ *
+ * This one seems to fail with mysql 5.5
+ * SELECT DISTINCT dest.post_code, 11100*distance(orig.coordinates, dest.coordinates) as sdistance
+ *   FROM city orig, city dest
+ *   WHERE orig.post_code = '84470'
+ *   having sdistance < 50
+ *   ORDER BY sdistance limit 10
+ *
+ * @todo Need to check query data, must be an interger
+ */
+exports.near = function(postcode, distance, limit, done) {
+    var sql =  "SELECT DISTINCT dest.*, 11100*glength(LineStringFromWKB(LineString(GeomFromText(astext(PointFromWKB(orig.coordinates))),GeomFromText(astext(PointFromWKB(dest.coordinates)))))) as sdistance ";
+        sql += "FROM city orig, city dest ";
+        sql += "WHERE orig.post_code = " + db.connection.escape(postcode);
+        sql += " having sdistance < " + (distance || 50);
+        sql += " ORDER BY sdistance LIMIT " + (limit || 10);
 
     db.connection.query(
         sql,
