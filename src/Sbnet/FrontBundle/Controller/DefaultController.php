@@ -61,8 +61,13 @@ class DefaultController extends Controller
       $geo = $this->container->get("sbnet_front.apiaccess");
       $city = $geo->getById($request->get('id'));
 
+      $weather = $this->container->get("sbnet.weather.owm");
+      $weather->setParameters("units=metric&lang=fr");
+      $forecast = $weather->getForecastByCoord($city->coordinates->lat, $city->coordinates->lon);
+
       return $this->render('SbnetFrontBundle:Default:city.html.twig', array(
-        "city" => $city
+        "city" => $city,
+        "forecast" => $forecast
       ));
     }
 

@@ -21,5 +21,6 @@ body { padding-top: 70px; }
 #map {
   height: 430px;
   position: relative;
-  /*width: 100%;*/
 }
+
+.nomargin{margin:0;}

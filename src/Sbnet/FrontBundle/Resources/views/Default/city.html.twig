@@ -11,22 +11,38 @@
 
 {% block content %}
   <h1>{{ city.prefix }}{{ city.name }}</h1>
+
   <div class="row">
     <div class="col-lg-4">
       <p>
-        La ville de {{ city.prefix }}{{ city.name }} est dans le département de {{ city.area_formal_name }} ({{ city.area_code }}), dans la région {{ city.region_formal_name }}.
+        La ville de {{ city.prefix }}{{ city.name }} est dans le département de <a href="{{ url('sbnet_front_area', { 'id': city.narea_id, 'name': city.area_name }) }}">{{ city.area_formal_name }} ({{ city.area_code }})</a>, dans la région <a href="{{ url('sbnet_front_region', {'id': city.nregion_id, 'name': city.region_name}) }}">{{ city.region_formal_name }}</a>.
       </p>
       <p>
         La population de {{ city.prefix }}{{ city.name }} est au nombre de {{ city.population|number_format(0, '.', ' ') }} habitants.
         {% if city.gentile is not empty %}
             Ses habitants sont appelés des {{ city.gentile }}.
         {% endif %}
-      </p>
+      </p>      
       <p>
         Son code postal est le {{ city.post_code }} et son code insee unique est le {{ city.department_code }}{{ city.city_code }}
       </p>
+      {% if city.mayor %}
+        <h2>Mairie</h2>
+        <p>Le maire est : {{ city.mayor }}</p>
+        {% if city.cityhall_web %}
+        <p>Contacts: <a href="{{ city.cityhall_web}}">site web</a> {% if city.cityhall_phone %}et {{ city.cityhall_phone}}{% endif %}
+        {% endif %}
+        </p>
+      {% endif %}
     </div>
+
     <div class="col-lg-4">
+        <h2 class="nomargin">La météo sur {{ city.prefix }}{{ city.name }}</h2>
+        <p class="nomargin">Temperature : {{ forecast.list[0].main.temp | number_format(0, '.', ' ') }}°C</p>
+        <p class="nomargin">Pression : {{ forecast.list[0].main.pressure | number_format(0, '.', ' ') }} hpa</p>
+        <p class="nomargin">Humidité : {{ forecast.list[0].main.humidity | number_format(0, '.', ' ') }}%</p>
+        <p class="nomargin">Vent : {{ forecast.list[0].wind.speed | number_format(0, '.', ' ') }} Km/h</p>
+        <p class="nomargin">Temps : {{ forecast.list[0].weather[0].description }}</p>
     </div>
     <div class="col-lg-4" id="map">
     </div>
