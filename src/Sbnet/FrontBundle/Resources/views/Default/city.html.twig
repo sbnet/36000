@@ -11,6 +11,7 @@
 
 {% block content %}
   <h1>{{ city.prefix }}{{ city.name }}</h1>
+
   <div class="row">
     <div class="col-lg-4">
       <p>
@@ -34,8 +35,9 @@
         </p>
       {% endif %}
     </div>
+
     <div class="col-lg-4">
-        <h2>La météo sur {{ city.prefix }}{{ city.name }}</h2>
+        <h2 class="pnospace">La météo sur {{ city.prefix }}{{ city.name }}</h2>
         <p class="pnospace">Temperature : {{ forecast.list[0].main.temp | number_format(0, '.', ' ') }}°C</p>
         <p class="pnospace">Pression : {{ forecast.list[0].main.pressure | number_format(0, '.', ' ') }} hpa</p>
         <p class="pnospace">Humidité : {{ forecast.list[0].main.humidity | number_format(0, '.', ' ') }}%</p>
