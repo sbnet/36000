@@ -21,10 +21,10 @@ before-install:
   - composer self-update
 
 install:
-  - composer install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - echo "sbnet_weather.owm.key: none" >> app/config/parameters.yml
   - echo "sbnet_weather.wc.key: none" >> app/config/parameters.yml
+  - composer install
   - php bin/console doctrine:database:create
   - php bin/console doctrine:schema:update --force
   - php bin/console doctrine:fixtures:load -n
