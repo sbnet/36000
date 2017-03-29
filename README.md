@@ -11,10 +11,6 @@ Most of this project is a work in progress, many documentations is incomplete.
 
 If you want to participate don't hesitate to contact me at stephane@sbnet.fr fork this project and submit a pull request.
 
-# Tests
-
-[![Build Status](https://travis-ci.org/sbnet/36000.svg?branch=master)](https://travis-ci.org/sbnet/36000)
-
 # License
 
 Copyright (c) 2015 Stephane BRUN
