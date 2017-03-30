@@ -7,9 +7,13 @@ In the wiki section there is some documentation about :
 * The [symfony service](#) used to access the API
 * The [installation process](https://github.com/sbnet/36000/wiki/install)
 
-Most of this project is a work in progress, many documentations is incomplete.
+Most of this project is a work in progress, the documentations is on its way and may be incomplete.
 
-If you want to participate don't hesitate to contact me at stephane@sbnet.fr fork this project and submit a pull request.
+If you want to participate don't hesitate fork this project and submit a pull request.
+
+# Tests
+
+[![Build Status](https://travis-ci.org/sbnet/36000.svg?branch=master)](https://travis-ci.org/sbnet/36000)
 
 # License
 
