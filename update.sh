@@ -13,6 +13,10 @@ for i in "$@" ; do
     fi
 done
 
-#chmod 777 -R var/cache/ var/logs/ var/sessions/
+# may be done as root
+chmod 777 -R var/cache/ var/logs/ var/sessions/
 php bin/console assetic:dump --env=prod
-php bin/console cache:clear
+php bin/console cache:clear --env=prod
+chmod 777 -R var/cache/ var/logs/ var/sessions/
+
+exit
