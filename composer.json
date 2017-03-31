@@ -33,7 +33,7 @@
         "symfony/assetic-bundle": "^2.8",
         "ci/restclientbundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "sbnet/weatherbundle": "dev-master"
+        "sbnet/weatherbundle": "dev-master"        
     },
 
     "require-dev": {
