@@ -1,66 +1,42 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../mysqlConfig.js');
+var city = require('../models/region.js');
+var api = require('../api.js');
 
 /* GET regions listing. */
 router.get('/', function(req, res, next) {
-  var q = 'SELECT * FROM region ORDER BY name';
-
-  db.connection.query(
-    q,
-    function select(error, results, fields) {
-      if(error){
-        db.connection.end();
-        return;
-      }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+    res.setHeader('Content-Type', 'application/json');
+    city.getAll(function(error, result) {
+        if(error){
+            res.send(JSON.stringify(error));
+        }
+        result = api.parseId('region', result);
+        res.send(JSON.stringify(result));
+    });
 });
 
 /* Get a region by his ID */
 router.get('/id/:id', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ??=?";
-  var inserts = ['region', 'id', req.params.id];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
+  res.setHeader('Content-Type', 'application/json');
+  region.getById(req.params.id, function(error, result) {
       if(error){
-        db.connection.end();
-        return;
+          res.send(JSON.stringify(error));
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+      result = api.parseId('region', result);
+      res.send(JSON.stringify(result));
+  });
 });
 
 /* Search for a region */
 router.get('/search/:q', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ?? LIKE ?";
-  var inserts = ['region', 'search', '%' + req.params.q.toUpperCase() + '%'];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
+  res.setHeader('Content-Type', 'application/json');
+  region.search(req.params.q, function(error, result) {
       if(error){
-        db.connection.end();
-        return;
+          res.send(JSON.stringify(error));
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+      result = api.parseId('region', result);
+      res.send(JSON.stringify(result));
+  });
 });
 
-router.get('/search', function(req, res, next) {
-  res.render('regions-search', { title: 'Regions search' });
-});
 module.exports = router;

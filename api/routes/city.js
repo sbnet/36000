@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var city = require('../models/city.js');
-var config = require('../config.js');
+// var config = require('../config.js');
 var api = require('../api.js');
 
 /* Get biggers cities */
@@ -101,13 +101,15 @@ router.get('/search/:q', function(req, res, next) {
     });
 });
 
-/**
- * Search for nearest cities
- * /city/near/84470?distance=10&limit=2
- */
+/*
+  Search by postal code for cities near another one
+*/
 router.get('/near/:postcode', function(req, res, next) {
+    var distance = req.query.distance || 50;
+    var limit = req.query.limit || 10;
+    
     res.setHeader('Content-Type', 'application/json');
-    city.near(req.params.postcode, req.query.distance, req.query.limit, function(error, result) {
+    city.near(req.params.postcode, distance, limit, function(error, result) {
         if(error){
             res.send(JSON.stringify(error));
         }
