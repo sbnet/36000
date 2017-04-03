@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var city = require('../models/region.js');
+var region = require('../models/Region.js');
 var api = require('../api.js');
 
 /* GET regions listing. */
 router.get('/', function(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
-    city.getAll(function(error, result) {
+    region.getAll(function(error, result) {
         if(error){
             res.send(JSON.stringify(error));
         }
