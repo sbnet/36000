@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var city = require('../models/city.js');
+var city = require('../models/City.js');
 // var config = require('../config.js');
 var api = require('../api.js');
 
