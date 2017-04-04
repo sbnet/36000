@@ -1,107 +1,71 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../mysqlConfig.js');
+var area = require('../models/Area.js');
+var api = require('../api.js');
 
 /* GET full listing */
 router.get('/', function(req, res, next) {
-  var q = 'SELECT * FROM area';
-
-  db.connection.query(
-    q,
-    function select(error, results, fields) {
-      if(error){
-        db.connection.end();
-        return;
-      }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+    res.setHeader('Content-Type', 'application/json');
+    area.getAll(function(error, result) {
+        if(error){
+            res.send(JSON.stringify(error));
+        }
+        result = api.parseId('area', result);
+        res.send(JSON.stringify(result));
+    });
 });
 
 /* Get by his ID */
 router.get('/id/:id', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ??=?";
-  var inserts = ['area', 'id', req.params.id];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
+  res.setHeader('Content-Type', 'application/json');
+  area.getById(req.params.id, function(error, result) {
       if(error){
-        db.connection.end();
-        return;
+          res.send(JSON.stringify(error));
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+      result = api.parseId('area', result);
+      res.send(JSON.stringify(result));
+  });
 });
 
 /* Get by his region_id */
 router.get('/regionid/:id', function(req, res, next) {
-  var sql = "SELECT * FROM area WHERE region_id=? ORDER BY name";
-  var inserts = [req.params.id];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
+  res.setHeader('Content-Type', 'application/json');
+  area.getByRegionId(req.params.id, function(error, result) {
       if(error){
-        db.connection.end();
-        return;
+          res.send(JSON.stringify(error));
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+      result = api.parseId('area', result);
+      res.send(JSON.stringify(result));
+  });
 });
 
 
 /* Get by his code */
 router.get('/code/:id', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ??=?";
-  var inserts = ['area', 'code', req.params.id];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
+  res.setHeader('Content-Type', 'application/json');
+  area.getByCode(req.params.id, function(error, result) {
       if(error){
-        db.connection.end();
-        return;
+          res.send(JSON.stringify(error));
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+      result = api.parseId('area', result);
+      res.send(JSON.stringify(result));
+  });
 });
 
 /* Search for an area */
 router.get('/search/:q', function(req, res, next) {
-  var sql = "SELECT * FROM ?? WHERE ?? LIKE ?";
-  var inserts = ['area', 'search', '%' + req.params.q.toUpperCase() + '%'];
-  sql = db.mysql.format(sql, inserts);
-
-  db.connection.query(
-    sql,
-    function select(error, results, fields) {
+  res.setHeader('Content-Type', 'application/json');
+  area.search(req.params.q, function(error, result) {
       if(error){
-        db.connection.end();
-        return;
+          res.send(JSON.stringify(error));
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(results));
-    }
-  );
+      result = api.parseId('area', result);
+      res.send(JSON.stringify(result));
+  });
 });
 
-router.get('/search', function(req, res, next) {
-  res.render('areas-search', { title: 'Areas search' });
-});
+// router.get('/search', function(req, res, next) {
+//   res.render('areas-search', { title: 'Areas search' });
+// });
+
 module.exports = router;

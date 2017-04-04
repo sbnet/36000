@@ -138,7 +138,7 @@ class City extends Model{
 
     search(q, done) {
         var sql = "SELECT * FROM city WHERE search LIKE ? ORDER BY `post_code`";
-        var input = parseSearchInput(q);
+        var input = this.parseSearchInput(q);
         var inserts = ['%' + input + '%'];
         sql = this.db.mysql.format(sql, inserts);
 

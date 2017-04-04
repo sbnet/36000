@@ -9,6 +9,16 @@ var should = chai.should();
 chai.use(chaiHttp);
 
 describe('Region test', function(){
+
+  it('should returns a 404', (done) => {
+    chai.request(app)
+        .get('/region/'+Math.random().toString(36))
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+  });
+
   it('should get all regions', (done) => {
     chai.request(app)
         .get('/region')
